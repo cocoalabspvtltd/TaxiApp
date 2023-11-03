@@ -9,6 +9,7 @@ import 'package:new_app/core/bindings/mainBinding.dart';
 import 'package:new_app/core/injection/injectable.dart';
 import 'package:new_app/presentation/auth/auth_main.dart';
 import 'package:new_app/presentation/restaurant/bookRestaurant/bookedRestaurantScreen.dart';
+import 'package:new_app/presentation/trip/drivers_requests_list_screen.dart';
 import 'package:new_app/presentation/trip/user_trip_list.dart';
 import 'package:new_app/services/shared_pref.dart';
 import 'package:new_app/utils/exports.dart';
@@ -25,7 +26,7 @@ Future<dynamic> DrawerScreen(BuildContext context) {
       shape: r1,
       context: context,
       builder: (context) => SizedBox(
-            height: height(context, 0.4),
+            height: height(context, 0.45),
             child: DecoratedBox(
                 decoration: b1,
                 child: DecoratedBox(
@@ -74,6 +75,13 @@ Future<dynamic> DrawerScreen(BuildContext context) {
                             Get.to(() => BookedHotel());
                           },
                         ),
+                        buildTile(
+                            label: 'Driver requests',
+                            icon: cars,
+                            ontap: () {
+                              Get.find<HomeController>().apiTripUserList();
+                              Get.to(() => DriversRequestsScreen());
+                            }),
                         buildTile(
                             label: 'LogOut',
                             icon: logout,

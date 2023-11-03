@@ -68,7 +68,7 @@ class DriverScreen extends StatelessWidget {
                                               child: Icon(Icons.call, size: 15),
                                             ),
                                           ),
-                                          const SizedBox(width: 5),
+                                          SizedBox(width: 5),
                                           Container(
                                               decoration: BoxDecoration(
                                                   borderRadius:
