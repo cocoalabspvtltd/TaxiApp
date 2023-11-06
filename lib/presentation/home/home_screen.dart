@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/constants/colors.dart';
 import 'package:new_app/constants/styles.dart';
+import 'package:new_app/controller/auth/auth_controller.dart';
 import 'package:new_app/controller/home/home_controller.dart';
 import 'package:new_app/controller/hotel/hote_controller.dart';
 import 'package:new_app/controller/restaurant/restaurant_controller.dart';
@@ -22,6 +23,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ctr = Get.find<AuthController>();
     return Scaffold(
         body: SafeArea(
       child: SingleChildScrollView(
