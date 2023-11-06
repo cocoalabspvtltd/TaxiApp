@@ -37,6 +37,10 @@ class AuthController extends GetxController
 
     referralCode =
         await getIt<SharedPref>().getStringValue(key: "referral_code");
+    userName =
+    await getIt<SharedPref>().getStringValue(key: "name");
+    userEmail =
+    await getIt<SharedPref>().getStringValue(key: "email");
     super.onInit();
   }
 
