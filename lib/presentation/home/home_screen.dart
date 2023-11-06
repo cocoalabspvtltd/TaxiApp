@@ -10,6 +10,7 @@ import 'package:new_app/notification.dart';
 import 'package:new_app/presentation/home/drawer.dart';
 import 'package:new_app/presentation/hotels/bookHotel/availableHotels.dart';
 import 'package:new_app/presentation/hotels/myHotels/myHotel.dart';
+import 'package:new_app/presentation/profile/profile_screen.dart';
 import 'package:new_app/presentation/restaurant/bookRestaurant/searchRestaurant.dart';
 import 'package:new_app/presentation/restaurant/myRestaurant/myRestaurant.dart';
 import 'package:new_app/presentation/trip/trip_create.dart';
@@ -35,11 +36,19 @@ class HomeScreen extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(10),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         IconButton(
                             onPressed: (() => DrawerScreen(context)),
                             icon: const Icon(Icons.menu, color: whiteColor)),
+                        Spacer(),
+                        IconButton(
+                          onPressed: () => Get.to(() => ProfileScreen()),
+                          icon: const Icon(
+                            Icons.person_outline,
+                            color: whiteColor,
+                          ),
+                        ),
                         IconButton(
                           onPressed: () => Get.to(() => NotificationScreen()),
                           icon: const Icon(
@@ -90,7 +99,6 @@ class HomeScreen extends StatelessWidget {
                   const SizedBox(height: 15),
                   Text('Explore', style: s7),
                   const SizedBox(height: 10),
-
                   exploreCards(() {
                     Get.find<RestaurantController>()
                         .apiGetOwnerMyRestaurantDetails();

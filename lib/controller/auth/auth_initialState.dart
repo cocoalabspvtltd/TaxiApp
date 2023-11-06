@@ -15,6 +15,8 @@ mixin LoginInitialState {
   TextEditingController logPasswordCtr = TextEditingController();
 
   String? referralCode;
+  String? userName;
+  String? userEmail;
 }
 
 mixin SignUpInitialState {

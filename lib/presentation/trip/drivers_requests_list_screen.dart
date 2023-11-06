@@ -1,3 +1,4 @@
+import 'package:new_app/presentation/trip/drivers_request_details_screen.dart';
 import 'package:new_app/utils/exports.dart';
 
 class DriversRequestsScreen extends StatelessWidget {
@@ -39,7 +40,7 @@ class RequestCard extends StatelessWidget {
               elevation: 2,
               child: ListTile(
                 onTap: (){
-
+                  Get.to(() => DriversRequestsDetailsScreen());
                 },
                 isThreeLine: true,
                 title: Row(
