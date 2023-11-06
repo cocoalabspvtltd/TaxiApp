@@ -35,12 +35,9 @@ class AuthController extends GetxController
       isLogeddInFun();
     }
 
-    referralCode =
-        await getIt<SharedPref>().getStringValue(key: "referral_code");
-    userName =
-    await getIt<SharedPref>().getStringValue(key: "name");
-    userEmail =
-    await getIt<SharedPref>().getStringValue(key: "email");
+    referralCode = await getIt<SharedPref>().getStringValue(key: "referral_code");
+    userName = await getIt<SharedPref>().getStringValue(key:"name");
+    userEmail = await getIt<SharedPref>().getStringValue(key: "email");
     super.onInit();
   }
 
@@ -48,7 +45,6 @@ class AuthController extends GetxController
   void onClose() {
     logEmailCtr.clear();
     logPasswordCtr.clear();
-
     signUpTextClear();
   }
 

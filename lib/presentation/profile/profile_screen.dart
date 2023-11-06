@@ -3,14 +3,13 @@ import 'package:new_app/controller/auth/auth_controller.dart';
 import 'package:new_app/utils/exports.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
+   ProfileScreen({super.key});
+  final ctr = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
-    final ctr = Get.find<AuthController>();
     print("Name : ${ctr.userName}");
     print("Email : ${ctr.userEmail}");
-    print("Code : ${ctr.loginUserData?.user?.referralCode}");
+    print("Code : ${ctr.referralCode}");
     return Scaffold(
       appBar: appBars(text: 'Profile'),
       backgroundColor: violetcolor,
@@ -92,153 +91,189 @@ class ProfileScreen extends StatelessWidget {
                                   fontSize: 16.0),
                             ),
                           ),
+                          SizedBox(height: 10,),
                           Container(
                             margin: EdgeInsets.fromLTRB(20, 15, 20, 5),
                             width: double.infinity,
                             height: 0.5,
                             color: Colors.white38,
                           ),
-                          Container(
-                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            alignment: FractionalOffset.center,
-                            color: Colors.black38,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.mail_outline,
-                                  color: Colors.white,
-                                  size: 26,
-                                ),
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  child: Text(
-                                    "${ctr.loginUserData?.user?.email ?? ctr.userEmail ?? ''}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14.0),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 10),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              alignment: FractionalOffset.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20)),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.mail_outline,
+                                    color: Colors.white,
+                                    size: 26,
                                   ),
-                                  flex: 1,
-                                ),
-                              ],
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: Text(
+                                      "${ctr.loginUserData?.user?.email ?? ctr.userEmail ?? ''}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0),
+                                    ),
+                                    flex: 1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            alignment: FractionalOffset.center,
-                            color: Colors.black38,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.phone_in_talk,
-                                  color: Colors.white,
-                                  size: 26,
-                                ),
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  child: Text(
-                                    "${ctr.loginUserData?.user?.phone}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14.0),
+                            margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                            width: double.infinity,
+                            height: 0.5,
+                            color: Colors.white38,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 10),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              alignment: FractionalOffset.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20)),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.phone_in_talk,
+                                    color: Colors.white,
+                                    size: 26,
                                   ),
-                                  flex: 1,
-                                ),
-                              ],
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: Text(
+                                      "${ctr.loginUserData?.user?.phone}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0),
+                                    ),
+                                    flex: 1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            alignment: FractionalOffset.center,
-                            color: Colors.black38,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.card_membership,
-                                  color: Colors.white,
-                                  size: 26,
-                                ),
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  child: Text(
-                                    "Referral Code : ${ctr.loginUserData?.user?.referralCode ?? ctr.referralCode ?? ''}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14.0),
+                            margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                            width: double.infinity,
+                            height: 0.5,
+                            color: Colors.white38,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 10),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              alignment: FractionalOffset.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20)),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.calendar_today,
+                                    color: Colors.white,
+                                    size: 26,
                                   ),
-                                  flex: 1,
-                                ),
-                              ],
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: Text(
+                                      "${ctr.loginUserData?.user?.dob}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0),
+                                    ),
+                                    flex: 1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                           Container(
-                            padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-                            alignment: FractionalOffset.center,
-                            color: Colors.black38,
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.phone_in_talk,
-                                  color: Colors.white,
-                                  size: 26,
-                                ),
-                                SizedBox(width: 10,),
-                                Expanded(
-                                  child: Text(
-                                    "${ctr.loginUserData?.user?.phone}",
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w400,
-                                        fontSize: 14.0),
+                            margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                            width: double.infinity,
+                            height: 0.5,
+                            color: Colors.white38,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10,right: 10),
+                            child: Container(
+                              padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
+                              alignment: FractionalOffset.center,
+                              decoration: BoxDecoration(
+                                color: Colors.black38,
+                                borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(20),
+                                    topRight: Radius.circular(20),
+                                    bottomLeft: Radius.circular(20),
+                                    bottomRight: Radius.circular(20)),),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.card_membership,
+                                    color: Colors.white,
+                                    size: 26,
                                   ),
-                                  flex: 1,
-                                ),
-                              ],
+                                  SizedBox(width: 10,),
+                                  Expanded(
+                                    child: Text(
+                                      "Referral Code : ${ctr.loginUserData?.user?.referralCode ?? ctr.referralCode ?? ''}",
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w400,
+                                          fontSize: 14.0),
+                                    ),
+                                    flex: 1,
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                          // ElevatedButton(
-                          //   style: ElevatedButton.styleFrom(
-                          //     shape: RoundedRectangleBorder(
-                          //       borderRadius: new BorderRadius.circular(10.0),
-                          //     ),
-                          //     primary: Colors.transparent,
-                          //     elevation: 0.0,
-                          //     padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
-                          //     side: BorderSide(
-                          //       width: 2.0,
-                          //       color: Colors.transparent,
-                          //     ),
-                          //   ),
-                          //   onPressed: () async {
-                          //   },
-                          //   child: Text(
-                          //     "Edit",
-                          //     textAlign: TextAlign.center,
-                          //     style: TextStyle(
-                          //         color: primaryColor,
-                          //         fontSize: 16,
-                          //         fontFamily: 'roboto',
-                          //         fontWeight: FontWeight.w700),
-                          //   ),
-                          // ),
+                          Container(
+                            margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                            width: double.infinity,
+                            height: 0.5,
+                            color: Colors.white38,
+                          ),
                         ],
                       ),
                     ),
