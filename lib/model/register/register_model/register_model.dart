@@ -8,7 +8,7 @@ part 'register_model.g.dart';
 @freezed
 class RegisterModel with _$RegisterModel {
   factory RegisterModel({
-    String? name,
+    @JsonKey(name: 'name') String? name,
     @JsonKey(name: 'nick_name') String? nickName,
     String? email,
     int? phone,

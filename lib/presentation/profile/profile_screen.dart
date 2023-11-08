@@ -4,11 +4,11 @@ import 'package:new_app/utils/exports.dart';
 
 class ProfileScreen extends StatelessWidget {
    ProfileScreen({super.key});
-  final ctr = Get.find<AuthController>();
   @override
   Widget build(BuildContext context) {
+    final ctr = Get.find<AuthController>();
     print("Name : ${ctr.userName}");
-    print("Email : ${ctr.userEmail}");
+    // print("Email : ${ctr.userEmail}");
     print("Code : ${ctr.referralCode}");
     return Scaffold(
       appBar: appBars(text: 'Profile'),
@@ -122,7 +122,7 @@ class ProfileScreen extends StatelessWidget {
                                   SizedBox(width: 10,),
                                   Expanded(
                                     child: Text(
-                                      "${ctr.loginUserData?.user?.email ?? ctr.userEmail ?? ''}",
+                                      "${ctr.loginUserData?.user?.email}",
                                       maxLines: 2,
                                       overflow: TextOverflow.ellipsis,
                                       style: TextStyle(

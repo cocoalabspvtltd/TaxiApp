@@ -10,7 +10,7 @@ const roleDetails = '/role-details';
 // Vehicle owner
 const apiDriverDetails = '/drivers/home';
 const apiAddVehicle = '/driver/car/store';
-const apiDriverReview = '/driver/reviews';
+const apiDriverReview = '/driver/reviews/list';
 const apiDriverOwnerBookings = '/driver/trip/request/list';
 const apiVehicleEdit = '/driver/update';
 
@@ -49,3 +49,6 @@ const apiDriverOnThisRoute = '/drivers/get';
 
 //profile
 const uploadprofilepic = '/user/profile-pic';
+
+//driver
+const driverRequsetList='/driver/trip/request/list';

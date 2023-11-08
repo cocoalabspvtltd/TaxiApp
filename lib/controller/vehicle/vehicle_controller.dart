@@ -7,6 +7,7 @@ import 'package:new_app/controller/home/home_controller.dart';
 import 'package:new_app/controller/vehicle/vehicle_initialState.dart';
 import 'package:new_app/core/failure/main_failure.dart';
 import 'package:new_app/infrastructure/vehicleApis/vehicle_repository.dart';
+import 'package:new_app/model/driver/driver_request_model/driver_request_model.dart';
 import 'package:new_app/model/driver/owner_driver_reaquest_base_model/ownerDriverRequestModel.dart';
 import 'package:new_app/services/image_picker.dart';
 import 'package:new_app/widgets/ww_showToast.dart';
@@ -297,5 +298,78 @@ class VehicleController extends GetxController with VehicleInitialState {
     });
     deleteMyVehicleReviewLoader = false;
     update(['update_btn_review_delete_vehicle']);
+  }
+
+
+  void driverRequestList() async {
+    driverRequestListLoader = true;
+    update(['DriverRequestLoader']);
+    await _vehicleRepoImpl
+        .driverRequestList()
+        .then((value) => value.fold((l) => driverRequestListFailure = l, (r) {
+      driverRequestListFailure = null;
+      driverRequestListing = r;
+    }));
+    driverRequestListLoader = false;
+    update(['DriverRequestLoader']);
+  }
+
+  void acceptOrRejectDriverRequestFn({
+    required int id,
+    required AcceptOrRejectDriverRequest acceptOrRejectDriverRequest,
+  }) async {
+    if (acceptOrRejectDriverRequest == AcceptOrRejectDriverRequest.accept) {
+      driverRequestAcceptBookingLoader = true;
+      update(["accept_driver_request"]);
+    } else {
+      driverRequestRejectBookingLoader = true;
+      update(["reject_driver_request"]);
+    }
+
+    final data = await _vehicleRepoImpl.acceptOrRejectDriverRequest(
+      id: id,
+      status: acceptOrRejectDriverRequest == AcceptOrRejectDriverRequest.accept
+          ? "accepted"
+          : "rejected",
+    );
+
+    data.fold(
+          (l) => l.fold(
+            (l) => wwShowToast("Something went wrong", status: Status.failure),
+            (r) => null,
+      ),
+          (r) {
+        int? index = driverRequestListing?.requests?.indexWhere(
+              (request) => request.id == id,
+        );
+        if (index != null && index != -1) {
+          List<DriverRequestModel>? list =
+          driverRequestListing?.requests?.toList();
+
+          list![index] = list[index].copyWith(
+            status: acceptOrRejectDriverRequest == AcceptOrRejectDriverRequest.accept
+                ? "accepted"
+                : "rejected",
+          );
+          driverRequestListing = driverRequestListing?.copyWith(requests: list);
+          update(["driverRequestsLoading"]);
+        }
+
+        Get.back();
+        wwShowToast(
+          acceptOrRejectDriverRequest == AcceptOrRejectDriverRequest.accept
+              ? "Request Accepted Successfully"
+              : "Request Rejected Successfully",
+          status: Status.success,
+        );
+      },
+    );
+    if (acceptOrRejectDriverRequest == AcceptOrRejectDriverRequest.accept) {
+      driverRequestAcceptBookingLoader = false;
+      update(["accept_driver_request"]);
+    } else {
+      driverRequestAcceptBookingLoader = false;
+      update(["reject_driver_request"]);
+    }
   }
 }
