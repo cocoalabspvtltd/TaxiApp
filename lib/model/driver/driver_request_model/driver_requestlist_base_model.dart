@@ -16,4 +16,5 @@ class DriverRequsetlistBaseModel with _$DriverRequsetlistBaseModel {
 
   factory DriverRequsetlistBaseModel.fromJson(Map<String, dynamic> json) =>
       _$DriverRequsetlistBaseModelFromJson(json);
+
 }
