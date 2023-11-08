@@ -24,6 +24,8 @@ enum AddOrEditFood { addFood, editFood }
 
 enum AcceptOrRejectBooking { accept, reject }
 
+enum AcceptOrRejectDriverRequest { accept, reject }
+
 mixin ReviewInitialState {
   List<ReviewListModel> reviewData = [
     ReviewListModel('Alex', 'Test Description', '4'),

@@ -8,6 +8,7 @@ import 'package:dartz/dartz.dart';
 import 'package:new_app/core/injection/injectable.dart';
 import 'package:new_app/infrastructure/vehicleApis/vehicle_repository.dart';
 import 'package:new_app/model/driver/driver_base_model/vehicle_base_model.dart';
+import 'package:new_app/model/driver/driver_request_model/driver_requestlist_base_model.dart';
 import 'package:new_app/model/driver/owner_driver_reaquest_base_model/owner_driver_request_base_model.dart';
 import 'package:new_app/model/errors/error_model/error_model.dart';
 import 'package:dio/dio.dart' as dio;
@@ -55,7 +56,7 @@ class VehicleRepoImpl implements IVehicleRepository {
   Future<Either<Either<MainFailure, ErrorModel>, ReviewBaseModel>>
       ownerDriverReviewList() async {
     return await getIt<DioServices>()
-        .request(url: '$apiDriverReview/list', method: 'GET')
+        .request(url: '$apiDriverReview', method: 'GET')
         .then((value) => value.fold(
             (l) => Left(l), (r) => Right(ReviewBaseModel.fromJson(r.data))));
   }
@@ -201,6 +202,30 @@ class VehicleRepoImpl implements IVehicleRepository {
     return response.fold(
       (failure) => Left(failure),
       (response) => Right(response.data),
+    );
+  }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, DriverRequsetlistBaseModel>> driverRequestList() async {
+    return await getIt<DioServices>()
+        .request(url: '$driverRequsetList', method: 'GET')
+        .then((value) => value.fold(
+            (l) => Left(l), (r) => Right(DriverRequsetlistBaseModel.fromJson(r.data))));
+  }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, String>> acceptOrRejectDriverRequest({required int id, required String status}) async{
+    var data = {"status": status};
+    var response = await getIt<DioServices>().request(
+      url: '/trip/driver/request/$id/update',
+      method: 'POST',
+      data: data,
+      auth: false,
+    );
+
+    return response.fold(
+          (failure) => Left(failure),
+          (response) => Right("success"),
     );
   }
 }

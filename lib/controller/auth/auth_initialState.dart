@@ -16,7 +16,7 @@ mixin LoginInitialState {
 
   String? referralCode;
   String? userName;
-  String? userEmail;
+  // String? userEmail;
 }
 
 mixin SignUpInitialState {

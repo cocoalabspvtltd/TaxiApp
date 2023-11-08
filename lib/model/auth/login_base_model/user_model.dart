@@ -9,7 +9,7 @@ part 'user_model.g.dart';
 class UserModel with _$UserModel {
   factory UserModel({
     int? id,
-    String? name,
+   @JsonKey(name: 'name') String? name,
     String? email,
     @JsonKey(name: 'email_verified_at') dynamic emailVerifiedAt,
     @JsonKey(name: 'nick_name') String? nickName,

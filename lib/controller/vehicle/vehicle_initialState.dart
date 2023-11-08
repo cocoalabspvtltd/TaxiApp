@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:new_app/core/failure/main_failure.dart';
 import 'package:new_app/model/driver/driver.dart';
 import 'package:new_app/model/driver/driver_base_model/vehicle_base_model.dart';
+import 'package:new_app/model/driver/driver_request_model/driver_requestlist_base_model.dart';
 import 'package:new_app/model/driver/owner_driver_reaquest_base_model/owner_driver_request_base_model.dart';
 import 'package:new_app/model/errors/error_model/error_model.dart';
 import 'package:new_app/model/review/review_base_model/review_base_model.dart';
@@ -53,4 +54,12 @@ mixin VehicleInitialState {
   //delete my Restaurant Review
   Either<MainFailure, ErrorModel>? errorDeleteMyVehicleReview;
   bool deleteMyVehicleReviewLoader = false;
+
+  DriverRequsetlistBaseModel? driverRequestListing;
+  Either<MainFailure, ErrorModel>? driverRequestListFailure;
+  bool driverRequestListLoader= false;
+
+  bool driverRequestAcceptBookingLoader = false;
+  bool driverRequestRejectBookingLoader = false;
+
 }

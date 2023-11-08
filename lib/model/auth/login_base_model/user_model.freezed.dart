@@ -21,6 +21,7 @@ UserModel _$UserModelFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$UserModel {
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   String? get email => throw _privateConstructorUsedError;
   @JsonKey(name: 'email_verified_at')
@@ -92,7 +93,8 @@ abstract class $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? name,
+      @JsonKey(name: 'name')
+          String? name,
       String? email,
       @JsonKey(name: 'email_verified_at')
           dynamic emailVerifiedAt,
@@ -344,7 +346,8 @@ abstract class _$$_UserModelCopyWith<$Res> implements $UserModelCopyWith<$Res> {
   @useResult
   $Res call(
       {int? id,
-      String? name,
+      @JsonKey(name: 'name')
+          String? name,
       String? email,
       @JsonKey(name: 'email_verified_at')
           dynamic emailVerifiedAt,
@@ -590,7 +593,7 @@ class __$$_UserModelCopyWithImpl<$Res>
 class _$_UserModel implements _UserModel {
   _$_UserModel(
       {this.id,
-      this.name,
+      @JsonKey(name: 'name') this.name,
       this.email,
       @JsonKey(name: 'email_verified_at') this.emailVerifiedAt,
       @JsonKey(name: 'nick_name') this.nickName,
@@ -629,6 +632,7 @@ class _$_UserModel implements _UserModel {
   @override
   final int? id;
   @override
+  @JsonKey(name: 'name')
   final String? name;
   @override
   final String? email;
@@ -838,7 +842,8 @@ class _$_UserModel implements _UserModel {
 abstract class _UserModel implements UserModel {
   factory _UserModel(
       {final int? id,
-      final String? name,
+      @JsonKey(name: 'name')
+          final String? name,
       final String? email,
       @JsonKey(name: 'email_verified_at')
           final dynamic emailVerifiedAt,
@@ -902,6 +907,7 @@ abstract class _UserModel implements UserModel {
   @override
   int? get id;
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
   String? get email;

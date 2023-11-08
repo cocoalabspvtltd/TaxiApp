@@ -20,6 +20,7 @@ RegisterModel _$RegisterModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$RegisterModel {
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'nick_name')
   String? get nickName => throw _privateConstructorUsedError;
@@ -45,7 +46,7 @@ abstract class $RegisterModelCopyWith<$Res> {
       _$RegisterModelCopyWithImpl<$Res, RegisterModel>;
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'name') String? name,
       @JsonKey(name: 'nick_name') String? nickName,
       String? email,
       int? phone,
@@ -123,7 +124,7 @@ abstract class _$$_RegisterModelCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? name,
+      {@JsonKey(name: 'name') String? name,
       @JsonKey(name: 'nick_name') String? nickName,
       String? email,
       int? phone,
@@ -194,7 +195,7 @@ class __$$_RegisterModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_RegisterModel implements _RegisterModel {
   _$_RegisterModel(
-      {this.name,
+      {@JsonKey(name: 'name') this.name,
       @JsonKey(name: 'nick_name') this.nickName,
       this.email,
       this.phone,
@@ -207,6 +208,7 @@ class _$_RegisterModel implements _RegisterModel {
       _$$_RegisterModelFromJson(json);
 
   @override
+  @JsonKey(name: 'name')
   final String? name;
   @override
   @JsonKey(name: 'nick_name')
@@ -271,7 +273,8 @@ class _$_RegisterModel implements _RegisterModel {
 
 abstract class _RegisterModel implements RegisterModel {
   factory _RegisterModel(
-      {final String? name,
+      {@JsonKey(name: 'name')
+          final String? name,
       @JsonKey(name: 'nick_name')
           final String? nickName,
       final String? email,
@@ -287,6 +290,7 @@ abstract class _RegisterModel implements RegisterModel {
       _$_RegisterModel.fromJson;
 
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
   @JsonKey(name: 'nick_name')

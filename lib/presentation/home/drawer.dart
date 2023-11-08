@@ -79,7 +79,7 @@ Future<dynamic> DrawerScreen(BuildContext context) {
                             label: 'Driver requests',
                             icon: cars,
                             ontap: () {
-                              Get.find<HomeController>().apiTripUserList();
+                              Get.find<VehicleController>().driverRequestList();
                               Get.to(() => DriversRequestsScreen());
                             }),
                         buildTile(
