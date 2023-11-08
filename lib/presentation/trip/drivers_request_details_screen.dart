@@ -167,7 +167,7 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
   Future bookingAcceptOrRejectDialogue(
       {required DriverRequestModel requestModel}) {
     return Get.defaultDialog(
-      title: "Booking",
+      title: "Update ",
       contentPadding: e7,
       confirm: GetBuilder<VehicleController>(
           id: "accept_driver_request",

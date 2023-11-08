@@ -23,4 +23,6 @@ class DriverRequestModel with _$DriverRequestModel {
 
   factory DriverRequestModel.fromJson(Map<String, dynamic> json) =>
       _$DriverRequestModelFromJson(json);
+
+
 }
