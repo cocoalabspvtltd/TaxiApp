@@ -5,6 +5,7 @@ import 'package:new_app/model/driver/driver_base_model/vehicle_base_model.dart';
 import 'package:new_app/model/driver/driver_request_model/driver_requestlist_base_model.dart';
 import 'package:new_app/model/driver/owner_driver_reaquest_base_model/owner_driver_request_base_model.dart';
 import 'package:new_app/model/errors/error_model/error_model.dart';
+import 'package:new_app/model/profile/profile_base_model.dart';
 import 'package:new_app/model/review/review_base_model/review_base_model.dart';
 import 'package:new_app/services/image_picker.dart';
 
@@ -59,4 +60,7 @@ abstract class IVehicleRepository {
     required int id,
     required String status,
   });
+
+  Future<Either<Either<MainFailure, ErrorModel>, ProfileBaseModel>>
+  profileListing();
 }

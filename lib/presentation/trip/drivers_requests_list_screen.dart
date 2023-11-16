@@ -11,10 +11,15 @@ class DriversRequestsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: appBars(text: 'Driver Requests'),
-        body: GetBuilder<VehicleController>(
-          id: 'DriverRequestListLoader',
+        body:
+
+        GetBuilder<VehicleController>(
+          id: 'driverRequestListLoader',
           builder: (_) {
-            return _.vehicleReviewFailure != null
+            return  _.driverRequestListLoader
+                ? Center(child: CircularProgressIndicator())
+                :
+            _.vehicleReviewFailure != null
                     ? WWFailureHandler(
                         failure: _.driverRequestListFailure!,
                         onTap: () => _.driverRequestList())
@@ -23,7 +28,9 @@ class DriversRequestsScreen extends StatelessWidget {
                         : DriverRequestListStateless(
                             data: _.driverRequestListing?.requests);
           },
-        ));
+        )
+
+    );
   }
 }
 
@@ -94,6 +101,7 @@ class DriverRequestListStateless extends StatelessWidget {
                   )),
             );
           },
-        ));
+        )
+    );
   }
 }

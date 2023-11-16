@@ -57,7 +57,7 @@ class DioServices {
 
         getIt<SharedPref>().setStringValue(
           key: "referral_code",
-          value: response.data["user"]["referral_code"],
+          value: response.data["user"]! ["referral_code"],
         );
 
         log("${dioInstance.options.headers}", name: "Token");

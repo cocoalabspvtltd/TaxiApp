@@ -255,7 +255,6 @@ class VehicleController extends GetxController with VehicleInitialState {
           update(["driverOwnerBookingsLoading"]);
         }
 
-        Get.back();
         wwShowToast(
           acceptOrRejectBooking == AcceptOrRejectBooking.accept
               ? "Booking Accepted Successfully"
@@ -303,7 +302,7 @@ class VehicleController extends GetxController with VehicleInitialState {
 
   void driverRequestList() async {
     driverRequestListLoader = true;
-    update(['DriverRequestLoader']);
+    update(['driverRequestListLoader']);
     await _vehicleRepoImpl
         .driverRequestList()
         .then((value) => value.fold((l) => driverRequestListFailure = l, (r) {
@@ -311,7 +310,7 @@ class VehicleController extends GetxController with VehicleInitialState {
       driverRequestListing = r;
     }));
     driverRequestListLoader = false;
-    update(['DriverRequestLoader']);
+    update(['driverRequestListLoader']);
   }
 
   void acceptOrRejectDriverRequestFn({
@@ -371,5 +370,18 @@ class VehicleController extends GetxController with VehicleInitialState {
       driverRequestAcceptBookingLoader = false;
       update(["reject_driver_request"]);
     }
+  }
+
+  void apiProfileList() async {
+    profileListLoader = true;
+    update(['profileListLoader']);
+    await _vehicleRepoImpl
+        .profileListing()
+        .then((value) => value.fold((l) => profileListFailure = l, (r) {
+      profileListFailure = null;
+      profileListing = r;
+    }));
+    profileListLoader = false;
+    update(['profileListLoader']);
   }
 }
