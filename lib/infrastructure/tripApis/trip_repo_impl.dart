@@ -180,8 +180,8 @@ class TripRepositoryImpl implements ITripRepository {
 
     return await getIt<DioServices>()
         .request(
-          url: '$apiUserOnThisRoute/$tripId/set-driver?driver_id=$userId',
-          method: 'PATCH',
+          url: '$apiUserOnThisRoute/$tripId/driver-request?driver_id=$userId',
+          method: 'Post',
           // data: {"driver_id": userId, "trip_id": tripId},
         )
         .then((value) => value.fold((l) => Left(l), (r) => Right('succes')));

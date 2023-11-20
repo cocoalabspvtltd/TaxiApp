@@ -12,6 +12,7 @@ import 'package:new_app/model/driver/driver_request_model/driver_requestlist_bas
 import 'package:new_app/model/driver/owner_driver_reaquest_base_model/owner_driver_request_base_model.dart';
 import 'package:new_app/model/errors/error_model/error_model.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:new_app/model/profile/profile_base_model.dart';
 import 'package:new_app/model/review/review_base_model/review_base_model.dart';
 import 'package:new_app/services/dio_service.dart';
 import 'package:new_app/services/image_picker.dart';
@@ -227,5 +228,13 @@ class VehicleRepoImpl implements IVehicleRepository {
           (failure) => Left(failure),
           (response) => Right("success"),
     );
+  }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, ProfileBaseModel>> profileListing() async{
+    return await getIt<DioServices>()
+        .request(url: '$profileDetails', method: 'GET')
+        .then((value) => value.fold(
+            (l) => Left(l), (r) => Right(ProfileBaseModel.fromJson(r.data))));
   }
 }

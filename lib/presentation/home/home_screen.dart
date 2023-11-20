@@ -45,7 +45,10 @@ class HomeScreen extends StatelessWidget {
                             icon: const Icon(Icons.menu, color: whiteColor)),
                         Spacer(),
                         IconButton(
-                          onPressed: () => Get.to(() => ProfileScreen()),
+                          onPressed: () {
+                            Get.find<VehicleController>().apiProfileList();
+                            Get.to(() => ProfileScreen());
+                          } ,
                           icon: const Icon(
                             Icons.person_outline,
                             color: whiteColor,

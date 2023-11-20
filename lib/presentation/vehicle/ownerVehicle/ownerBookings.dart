@@ -18,7 +18,7 @@ class OwnerBookings extends StatelessWidget {
       body: GetBuilder<VehicleController>(
         id: "driverOwnerBookingsLoading",
         builder: (_) {
-          print("0>${_.driverOwnerBookings!.requests![0].pool!["created_at"]}");
+          print("0>${_.driverOwnerBookings?.requests![0].pool!["created_at"]}");
           return _.driverOwnerBookingsLoading
               ? Center(child: CircularProgressIndicator())
               : _.driverOwnerBookingsFailure != null

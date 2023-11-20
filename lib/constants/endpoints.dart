@@ -49,6 +49,7 @@ const apiDriverOnThisRoute = '/drivers/get';
 
 //profile
 const uploadprofilepic = '/user/profile-pic';
+const profileDetails="/profile-page";
 
 //driver
 const driverRequsetList='/driver/trip/request/list';

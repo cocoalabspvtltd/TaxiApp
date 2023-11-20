@@ -2,6 +2,8 @@ import 'package:new_app/controller/home/home_controller.dart';
 import 'package:new_app/controller/vehicle/vehicle_controller.dart';
 import 'package:new_app/model/driver/driver_request_model/driver_request_model.dart';
 import 'package:new_app/utils/exports.dart';
+import 'package:new_app/widgets/getdirection.dart';
+import 'package:new_app/widgets/ww_mapScreen.dart';
 import 'package:new_app/widgets/ww_showToast.dart';
 
 class DriversRequestsDetailsScreen extends StatelessWidget {
@@ -9,7 +11,7 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final driverRequest = Get.arguments as DriverRequestModel;
+    final driverRequest = Get.arguments;
     bool hasPool = driverRequest.pool != null;
     return Scaffold(
       appBar: appBars(text: "Details"),
@@ -102,60 +104,11 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
                               )
                             ],
                           ),
-                          // Row(
-                          //   children: [
-                          //     InkWell(
-                          //       onTap: () {
-                          //         GetBuilder<VehicleController>(
-                          //           id: "accept_booking",
-                          //           builder: (ctr) {
-                          //             return customAcceptButton(() {
-                          //               if (driverRequest.status !=
-                          //                   "accepted") {
-                          //                 ctr.acceptOrRejectDriverRequestFn(
-                          //                   id: driverRequest.id!,
-                          //                   acceptOrRejectDriverRequest:
-                          //                       AcceptOrRejectDriverRequest
-                          //                           .accept,
-                          //                 );
-                          //               } else {
-                          //                 wwShowToast(
-                          //                   "Already in accepted status",
-                          //                   status: Status.failure,
-                          //                 );
-                          //               }
-                          //             }, ctr.driverRequestAcceptBookingLoader);
-                          //           },
-                          //         );
-                          //       },
-                          //       child: Container(
-                          //         decoration: BoxDecoration(
-                          //           color: violetcolor,
-                          //           borderRadius: BorderRadius.circular(10),
-                          //         ),
-                          //         child: Padding(
-                          //           padding: const EdgeInsets.symmetric(
-                          //               horizontal: 20, vertical: 5),
-                          //           child: Text('Accept', style: s2),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     SizedBox(width: 20),
-                          //     Container(
-                          //       decoration: BoxDecoration(
-                          //           color: redColor,
-                          //           borderRadius: BorderRadius.circular(10)),
-                          //       child: Padding(
-                          //         padding: const EdgeInsets.symmetric(
-                          //             horizontal: 20, vertical: 5),
-                          //         child: Text('Reject', style: s2),
-                          //       ),
-                          //     )
-                          //   ],
-                          // ),
 
                       ),
                     ),
+                Container(height: 700,width: 400,
+                child: WWMapScreen(),)
               ],
             ),
           ),
@@ -177,12 +130,17 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
               child: buttons(
                 'Accept',
                     () {
-                  if (requestModel.status != "accepted") {
-                    ctr.acceptOrRejectVehicleBookingFn(
-                      id: requestModel.id!,
-                      acceptOrRejectBooking: AcceptOrRejectBooking.accept,
-                    );
-                  } else {
+                      if (requestModel.status != "accepted") {
+                        Get.to(() => RouteDisplayMap(
+                            from:requestModel.from.toString(),to:requestModel.to.toString()
+                        ));
+                        ctr.acceptOrRejectVehicleBookingFn(
+                            id: requestModel.id!,
+                            acceptOrRejectBooking: AcceptOrRejectBooking.accept,
+                          );
+
+                      }
+                      else {
                     wwShowToast(
                       "Already in accepted status",
                       status: Status.failure,
@@ -206,6 +164,7 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
                     id: requestModel.id!,
                     acceptOrRejectBooking: AcceptOrRejectBooking.reject,
                   );
+                  Get.back();
                 } else {
                   wwShowToast(
                     "Already in rejected status",
@@ -218,23 +177,12 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
           );
         },
       ),
-      // content: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.start,
-      //   children: [
-      //     SizedBox(height: 20),
-      //     // HorizontalDataView(
-      //     //   label: 'Username',
-      //     //   text: "Jithin",
-      //     // ),
-      //     SizedBox(height: 20),
-      //     HorizontalDataView(
-      //       label: 'DateTime',
-      //       text:
-      //       "${DateFormat('dd-MMMM-yyyy, kk:mm').format(requestModel.pool!["created_at"]!)}",
-      //     ),
-      //     SizedBox(height: 40),
-      //   ],
-      // ),
+      content: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+         Text("Update Driver Requests")
+        ],
+      ),
     );
   }
 }
