@@ -12,15 +12,16 @@ class MyPoolListScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appBars(text: "My Pool", centertitle: true),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(15.0),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            buttons('Add Driver', () => Get.to(() => DriverScreen())),
-          ],
-        ),
-      ),
+      // bottomNavigationBar: Padding(
+      //   padding: const EdgeInsets.all(15.0),
+      //   child: Row(
+      //     mainAxisAlignment: MainAxisAlignment.end,
+      //     children: [
+      //       buttons('Add Driver', () => Get.to(() => DriverScreen())),
+      //       // DriversRouteScreen
+      //     ],
+      //   ),
+      // ),
       body: SafeArea(
         child: GetBuilder<HomeController>(
           id: "my_pool",

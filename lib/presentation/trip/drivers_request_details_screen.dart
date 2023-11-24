@@ -12,7 +12,8 @@ class DriversRequestsDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final driverRequest = Get.arguments;
-    bool hasPool = driverRequest.pool != null;
+    bool hasPool = driverRequest != null && driverRequest.pool != null;
+    // bool hasPool = driverRequest.pool != null;
     return Scaffold(
       appBar: appBars(text: "Details"),
       body: SingleChildScrollView(

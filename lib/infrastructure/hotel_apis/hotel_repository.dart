@@ -27,7 +27,8 @@ abstract class IHotelRepository {
 
   Future<Either<Either<MainFailure, ErrorModel>, HotelModel>> getHotelDetails(
       {required int hotelId});
-
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookhotelreview(
+      {required int hotel_id, required int rating, required String comment});
   Future<Either<Either<MainFailure, ErrorModel>, String>>? bookHotel({
     required int roomId,
     required int hotelId,

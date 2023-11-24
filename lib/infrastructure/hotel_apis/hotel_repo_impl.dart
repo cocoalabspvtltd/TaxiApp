@@ -351,4 +351,28 @@ class HotelRepoImpl implements IHotelRepository {
       (response) => Right("Success"),
     );
   }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookhotelreview(
+      {required int hotel_id, required int rating, required String comment}) async {
+    var data = {
+      "hotel_id": hotel_id,
+      "rating": rating,
+      "comment": comment,
+    };
+    print("->${data}");
+    dio.FormData formData = dio.FormData.fromMap(data);
+
+    var response = await getIt<DioServices>().request(
+      url: '$baseUrl/$apibookedhotelreview',
+      method: 'POST',
+      data: formData,
+      auth: false,
+    );
+
+    return response.fold(
+          (failure) => Left(failure),
+          (response) => Right(response.data),
+    );
+  }
 }

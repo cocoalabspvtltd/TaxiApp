@@ -26,7 +26,7 @@ Future<dynamic> DrawerScreen(BuildContext context) {
       shape: r1,
       context: context,
       builder: (context) => SizedBox(
-            height: height(context, 0.45),
+            height: height(context, 0.38),
             child: DecoratedBox(
                 decoration: b1,
                 child: DecoratedBox(
@@ -75,13 +75,13 @@ Future<dynamic> DrawerScreen(BuildContext context) {
                             Get.to(() => BookedHotel());
                           },
                         ),
-                        buildTile(
-                            label: 'Driver requests',
-                            icon: cars,
-                            ontap: () {
-                              Get.find<VehicleController>().driverRequestList();
-                              Get.to(() => DriversRequestsScreen());
-                            }),
+                        // buildTile(
+                        //     label: 'Driver requests',
+                        //     icon: cars,
+                        //     ontap: () {
+                        //       Get.find<VehicleController>().driverRequestList();
+                        //       Get.to(() => DriversRequestsScreen());
+                        //     }),
                         buildTile(
                             label: 'LogOut',
                             icon: logout,

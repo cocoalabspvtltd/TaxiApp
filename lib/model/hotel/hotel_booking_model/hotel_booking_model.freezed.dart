@@ -33,6 +33,12 @@ mixin _$HotelBookingModel {
   String? get hotelName => throw _privateConstructorUsedError;
   @JsonKey(name: 'hotel_phone')
   String? get hotelPhone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'latitude')
+  String? get latitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'longitude')
+  String? get longitude => throw _privateConstructorUsedError;
+  @JsonKey(name: 'location_point')
+  String? get locationPoint => throw _privateConstructorUsedError;
   String? get image => throw _privateConstructorUsedError;
   String? get status => throw _privateConstructorUsedError;
   Room? get room => throw _privateConstructorUsedError;
@@ -58,6 +64,9 @@ abstract class $HotelBookingModelCopyWith<$Res> {
       @JsonKey(name: 'hotel_id') int? hotelId,
       @JsonKey(name: 'hotel_name') String? hotelName,
       @JsonKey(name: 'hotel_phone') String? hotelPhone,
+      @JsonKey(name: 'latitude') String? latitude,
+      @JsonKey(name: 'longitude') String? longitude,
+      @JsonKey(name: 'location_point') String? locationPoint,
       String? image,
       String? status,
       Room? room,
@@ -86,6 +95,9 @@ class _$HotelBookingModelCopyWithImpl<$Res, $Val extends HotelBookingModel>
     Object? hotelId = freezed,
     Object? hotelName = freezed,
     Object? hotelPhone = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? locationPoint = freezed,
     Object? image = freezed,
     Object? status = freezed,
     Object? room = freezed,
@@ -119,6 +131,18 @@ class _$HotelBookingModelCopyWithImpl<$Res, $Val extends HotelBookingModel>
       hotelPhone: freezed == hotelPhone
           ? _value.hotelPhone
           : hotelPhone // ignore: cast_nullable_to_non_nullable
+              as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationPoint: freezed == locationPoint
+          ? _value.locationPoint
+          : locationPoint // ignore: cast_nullable_to_non_nullable
               as String?,
       image: freezed == image
           ? _value.image
@@ -168,6 +192,9 @@ abstract class _$$_HotelBookingModelCopyWith<$Res>
       @JsonKey(name: 'hotel_id') int? hotelId,
       @JsonKey(name: 'hotel_name') String? hotelName,
       @JsonKey(name: 'hotel_phone') String? hotelPhone,
+      @JsonKey(name: 'latitude') String? latitude,
+      @JsonKey(name: 'longitude') String? longitude,
+      @JsonKey(name: 'location_point') String? locationPoint,
       String? image,
       String? status,
       Room? room,
@@ -195,6 +222,9 @@ class __$$_HotelBookingModelCopyWithImpl<$Res>
     Object? hotelId = freezed,
     Object? hotelName = freezed,
     Object? hotelPhone = freezed,
+    Object? latitude = freezed,
+    Object? longitude = freezed,
+    Object? locationPoint = freezed,
     Object? image = freezed,
     Object? status = freezed,
     Object? room = freezed,
@@ -229,6 +259,18 @@ class __$$_HotelBookingModelCopyWithImpl<$Res>
           ? _value.hotelPhone
           : hotelPhone // ignore: cast_nullable_to_non_nullable
               as String?,
+      latitude: freezed == latitude
+          ? _value.latitude
+          : latitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      longitude: freezed == longitude
+          ? _value.longitude
+          : longitude // ignore: cast_nullable_to_non_nullable
+              as String?,
+      locationPoint: freezed == locationPoint
+          ? _value.locationPoint
+          : locationPoint // ignore: cast_nullable_to_non_nullable
+              as String?,
       image: freezed == image
           ? _value.image
           : image // ignore: cast_nullable_to_non_nullable
@@ -260,6 +302,9 @@ class _$_HotelBookingModel implements _HotelBookingModel {
       @JsonKey(name: 'hotel_id') this.hotelId,
       @JsonKey(name: 'hotel_name') this.hotelName,
       @JsonKey(name: 'hotel_phone') this.hotelPhone,
+      @JsonKey(name: 'latitude') this.latitude,
+      @JsonKey(name: 'longitude') this.longitude,
+      @JsonKey(name: 'location_point') this.locationPoint,
       this.image,
       this.status,
       this.room,
@@ -290,6 +335,15 @@ class _$_HotelBookingModel implements _HotelBookingModel {
   @JsonKey(name: 'hotel_phone')
   final String? hotelPhone;
   @override
+  @JsonKey(name: 'latitude')
+  final String? latitude;
+  @override
+  @JsonKey(name: 'longitude')
+  final String? longitude;
+  @override
+  @JsonKey(name: 'location_point')
+  final String? locationPoint;
+  @override
   final String? image;
   @override
   final String? status;
@@ -307,7 +361,7 @@ class _$_HotelBookingModel implements _HotelBookingModel {
 
   @override
   String toString() {
-    return 'HotelBookingModel(id: $id, checkIn: $checkIn, checkOut: $checkOut, roomId: $roomId, hotelId: $hotelId, hotelName: $hotelName, hotelPhone: $hotelPhone, image: $image, status: $status, room: $room, guests: $guests)';
+    return 'HotelBookingModel(id: $id, checkIn: $checkIn, checkOut: $checkOut, roomId: $roomId, hotelId: $hotelId, hotelName: $hotelName, hotelPhone: $hotelPhone, latitude: $latitude, longitude: $longitude, locationPoint: $locationPoint, image: $image, status: $status, room: $room, guests: $guests)';
   }
 
   @override
@@ -325,6 +379,12 @@ class _$_HotelBookingModel implements _HotelBookingModel {
                 other.hotelName == hotelName) &&
             (identical(other.hotelPhone, hotelPhone) ||
                 other.hotelPhone == hotelPhone) &&
+            (identical(other.latitude, latitude) ||
+                other.latitude == latitude) &&
+            (identical(other.longitude, longitude) ||
+                other.longitude == longitude) &&
+            (identical(other.locationPoint, locationPoint) ||
+                other.locationPoint == locationPoint) &&
             (identical(other.image, image) || other.image == image) &&
             (identical(other.status, status) || other.status == status) &&
             (identical(other.room, room) || other.room == room) &&
@@ -342,6 +402,9 @@ class _$_HotelBookingModel implements _HotelBookingModel {
       hotelId,
       hotelName,
       hotelPhone,
+      latitude,
+      longitude,
+      locationPoint,
       image,
       status,
       room,
@@ -371,6 +434,9 @@ abstract class _HotelBookingModel implements HotelBookingModel {
       @JsonKey(name: 'hotel_id') final int? hotelId,
       @JsonKey(name: 'hotel_name') final String? hotelName,
       @JsonKey(name: 'hotel_phone') final String? hotelPhone,
+      @JsonKey(name: 'latitude') final String? latitude,
+      @JsonKey(name: 'longitude') final String? longitude,
+      @JsonKey(name: 'location_point') final String? locationPoint,
       final String? image,
       final String? status,
       final Room? room,
@@ -399,6 +465,15 @@ abstract class _HotelBookingModel implements HotelBookingModel {
   @override
   @JsonKey(name: 'hotel_phone')
   String? get hotelPhone;
+  @override
+  @JsonKey(name: 'latitude')
+  String? get latitude;
+  @override
+  @JsonKey(name: 'longitude')
+  String? get longitude;
+  @override
+  @JsonKey(name: 'location_point')
+  String? get locationPoint;
   @override
   String? get image;
   @override

@@ -198,7 +198,35 @@ class HotelController extends GetxController with HotelInitialState {
       update(["edit_hotel_image"]);
     }
   }
+  void apihotelreviewSubmit(int hotelId, int rating, String comment) async {
+    hotelBookingLoader = true;
+    //errorBookTheRes = null;
+    update(["booking_btn"]);
+    Either<Either<MainFailure, ErrorModel>, dynamic>? data =
+    await _hotelRepoImpl.bookhotelreview(
+        hotel_id: hotelId, rating: rating, comment: comment);
 
+    data?.fold((failure) {
+    //  e = failure;
+      failure.fold((failure) {}, (error) {
+        log(error.toString());
+        wwShowToast(
+          "Something went wrong",
+          status: Status.failure,
+        );
+      });
+    }, (data) {
+      print("data $data");
+      wwShowToast(
+        "Review added Successfully",
+        status: Status.success,
+      );
+      Get.back();
+      // restaurantModel = data;
+    });
+    hotelBookingLoader = false;
+    update(['booking_btn']);
+  }
   Future<void> editMyHotelDetails({required AddOrEditHotel type}) async {
     final ctr = Get.find<AuthController>();
 

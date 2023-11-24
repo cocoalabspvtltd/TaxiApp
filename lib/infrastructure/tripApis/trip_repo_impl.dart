@@ -177,10 +177,10 @@ class TripRepositoryImpl implements ITripRepository {
          "pool_id": $poolId
 
         ''');
-
+print(tripId);
     return await getIt<DioServices>()
         .request(
-          url: '$apiUserOnThisRoute/$tripId/driver-request?driver_id=$userId',
+          url: '$apiUserOnThisRoute/driver/request/$tripId/store?driver_id=$userId',
           method: 'Post',
           // data: {"driver_id": userId, "trip_id": tripId},
         )

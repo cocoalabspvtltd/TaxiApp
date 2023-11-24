@@ -167,6 +167,41 @@ class RestaurantController extends GetxController with RestaurantInitialState {
     update(['booking_btn']);
   }
 
+
+
+  void apireviewSubmit(int restaurantId, int rating, String comment) async {
+    restaurantBookingLoader = true;
+    errorBookTheRes = null;
+    update(["booking_btn"]);
+    Either<Either<MainFailure, ErrorModel>, dynamic>? data =
+    await _iRestaurantRepo.bookRestaurantreview(
+        restaurant_id: restaurantId, rating: rating, comment: comment);
+
+    data?.fold((failure) {
+      errorBookTheRes = failure;
+      failure.fold((failure) {}, (error) {
+        log(error.toString());
+        wwShowToast(
+          "Something went wrong",
+          status: Status.failure,
+        );
+      });
+    }, (data) {
+      print("data $data");
+      wwShowToast(
+        "Review added Successfully",
+        status: Status.success,
+      );
+      Get.back();
+      // restaurantModel = data;
+    });
+    restaurantBookingLoader = false;
+    update(['booking_btn']);
+  }
+
+
+
+
 // booked restaurant details
 
   void apiGetBookedRestaurantList() async {

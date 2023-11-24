@@ -12,6 +12,7 @@ import 'package:new_app/model/review/review_model.dart';
 import 'package:new_app/model/trip/driver_routes_base_model/driver_routes_base_model.dart';
 import 'package:new_app/model/trip/trip_base_model/trip_base_model.dart';
 import 'package:new_app/model/trip/trip_base_model/trip_model.dart';
+import 'package:new_app/presentation/trip/user_on_this_route.dart';
 import 'package:new_app/presentation/trip/user_trip_list.dart';
 import 'package:new_app/services/dio_service.dart';
 import 'package:new_app/utils/exports.dart';
@@ -142,7 +143,7 @@ class HomeController extends GetxController
               wwShowToast('Trip Created', status: Status.success);
               apiTripUserList();
               // Get.to(() => InviteScreen());
-              Get.to(() => UserTripListScreen());
+              Get.to(() => UserOnThisRouteScreen());
             }));
 
     tripCreateLoader = false;
