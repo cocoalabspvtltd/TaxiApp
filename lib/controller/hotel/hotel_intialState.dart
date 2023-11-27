@@ -15,8 +15,13 @@ import 'package:new_app/services/image_picker.dart';
 mixin HotelInitialState {
   final editHotelFormKey = GlobalKey<FormState>();
 
-  TextEditingController hotelLocationCtr = TextEditingController();
+  TextEditingController hotelLocationFromCtr = TextEditingController();
+  TextEditingController hotelLocationToCtr = TextEditingController();
   Coordinates? hotelLatLong;
+  Coordinates? resLocationFrom;
+  Coordinates? resLocationTo;
+  TextEditingController resLocationFromCtr = TextEditingController();
+  TextEditingController resLocationToCtr = TextEditingController();
 
   HotelBaseModel? hotelModel;
   bool hotelBtnLoader = false;

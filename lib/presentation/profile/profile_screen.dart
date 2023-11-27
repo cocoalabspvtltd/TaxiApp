@@ -1,6 +1,3 @@
-
-
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/simple/get_state.dart';
@@ -64,7 +61,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0, 10, 0, 10),
                 margin: EdgeInsets.fromLTRB(15, 10, 15, 0),
                 decoration: BoxDecoration(
-                    color: greyColor,
+                    color: violetVColor,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(25),
                         topRight: Radius.circular(25),
@@ -132,7 +129,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                       margin: EdgeInsets.fromLTRB(20, 15, 20, 5),
                       width: double.infinity,
                       height: 0.5,
-                      color: Colors.white38,
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,right: 10),
@@ -140,7 +137,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         alignment: FractionalOffset.center,
                         decoration: BoxDecoration(
-                          color: Colors.black38,
+                          color: Colors.white30,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
@@ -173,10 +170,10 @@ class ProfileListScreenStateless extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                      margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
                       width: double.infinity,
                       height: 0.5,
-                      color: Colors.white38,
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,right: 10),
@@ -184,7 +181,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         alignment: FractionalOffset.center,
                         decoration: BoxDecoration(
-                          color: Colors.black38,
+                          color: Colors.white30,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
@@ -217,10 +214,10 @@ class ProfileListScreenStateless extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                      margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
                       width: double.infinity,
                       height: 0.5,
-                      color: Colors.white38,
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,right: 10),
@@ -228,7 +225,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         alignment: FractionalOffset.center,
                         decoration: BoxDecoration(
-                          color: Colors.black38,
+                          color: Colors.white30,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
@@ -246,7 +243,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                             SizedBox(width: 10,),
                             Expanded(
                               child: Text(
-                                "${data!.dob ?? ""}",
+                                "${data!.dob ?? "Dob"}",
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
                                 style: TextStyle(
@@ -261,10 +258,10 @@ class ProfileListScreenStateless extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                      margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
                       width: double.infinity,
                       height: 0.5,
-                      color: Colors.white38,
+                      color: Colors.white,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 10,right: 10),
@@ -272,7 +269,7 @@ class ProfileListScreenStateless extends StatelessWidget {
                         padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
                         alignment: FractionalOffset.center,
                         decoration: BoxDecoration(
-                          color: Colors.black38,
+                          color: Colors.white30,
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(20),
                               topRight: Radius.circular(20),
@@ -305,10 +302,10 @@ class ProfileListScreenStateless extends StatelessWidget {
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.fromLTRB(10, 10, 20, 5),
+                      margin: EdgeInsets.fromLTRB(20, 10, 20, 5),
                       width: double.infinity,
                       height: 0.5,
-                      color: Colors.white38,
+                      color: Colors.white,
                     ),
                   ],
                 ),

@@ -32,22 +32,26 @@ class HotelListScreen extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (context, index) {
                       final data = controller.hotelModel?.hotels?[index];
+                      String? avgRatingString=data?.avgRating;
+                      double avgRatingDouble = double.parse(avgRatingString ?? "0.0");
+                      String rating = avgRatingDouble.toStringAsFixed(0);
+
                       return listcards(
                         ontap: () {
                           controller.hotelDetail = null;
                           if (data?.id != null)
                             controller.getHotelDetail(hotelId: data!.id!);
-                          Get.to(() => const HotelDetailScreen());
+                          Get.to(() =>  HotelDetailScreen(ratingValue:rating,doublevalue:avgRatingDouble));
                         },
                         context: context,
                         image:
-                            // data?.image ??
+                        data?.image ??
                             "https://images.unsplash.com/photo-1625244724120-1fd1d34d00f6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
                         label: data?.hotelName ?? "",
-                        label1: '₹ 1500',
+                        label1: data?.type ?? "",
                         label2: (data?.avgRating ?? "0.0") == "0.0"
                             ? null
-                            : "${data?.avgRating ?? "0"} star hotel",
+                            : "${rating} star hotel",
                         label3: "perday/night",
                       );
                     },
