@@ -42,10 +42,9 @@ class SelectRoom extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10.0),
                     child: Image.network(
+                      ctr.hotelDetail?.rooms?[index].images
+                              ?.first ??
                       "https://images.unsplash.com/photo-1618773928121-c32242e63f39?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=870&q=80",
-                      // ctr.hotelDetail?.rooms?[index].images
-                      //         ?.first ??
-                      //     '',
                       width: 100.0,
                       height: 80.0,
                       fit: BoxFit.cover,

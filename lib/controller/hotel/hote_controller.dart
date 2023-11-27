@@ -36,13 +36,15 @@ class HotelController extends GetxController with HotelInitialState {
     update(["get_hotel"]);
     Either<Either<MainFailure, ErrorModel>, HotelBaseModel>? data =
         await _hotelRepoImpl.getHotels(
-      page: 1,
-      perPage: 10,
+            page: 1,
+            perPage: 10,
             minLat: resLocationFrom?.latitude.toString(),
             minLong: resLocationFrom?.longitude.toString(),
             maxLat: resLocationTo?.latitude.toString(),
-            maxLong: resLocationTo?.longitude.toString()
-    );
+            maxLong: resLocationTo?.longitude.toString(),
+            checkIn: checkInDatePickerSearchCtr.text,
+            checkOut: checkOutDatePickerSearchCtr.text,
+        );
 
     data?.fold((failure) {
       // Manage failure here
@@ -186,16 +188,17 @@ class HotelController extends GetxController with HotelInitialState {
       update(["edit_hotel_image"]);
     }
   }
+
   void apihotelreviewSubmit(int hotelId, int rating, String comment) async {
     hotelBookingLoader = true;
     //errorBookTheRes = null;
     update(["booking_btn"]);
     Either<Either<MainFailure, ErrorModel>, dynamic>? data =
-    await _hotelRepoImpl.bookhotelreview(
-        hotel_id: hotelId, rating: rating, comment: comment);
+        await _hotelRepoImpl.bookhotelreview(
+            hotel_id: hotelId, rating: rating, comment: comment);
 
     data?.fold((failure) {
-    //  e = failure;
+      //  e = failure;
       failure.fold((failure) {}, (error) {
         log(error.toString());
         wwShowToast(
@@ -215,6 +218,7 @@ class HotelController extends GetxController with HotelInitialState {
     hotelBookingLoader = false;
     update(['booking_btn']);
   }
+
   Future<void> editMyHotelDetails({required AddOrEditHotel type}) async {
     final ctr = Get.find<AuthController>();
 

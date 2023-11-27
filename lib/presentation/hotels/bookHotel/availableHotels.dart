@@ -1,10 +1,12 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:new_app/controller/home/home_controller.dart';
 import 'package:new_app/controller/hotel/hote_controller.dart';
+import 'package:new_app/presentation/hotels/bookHotel/book_hotel.dart';
 import 'package:new_app/utils/exports.dart';
-import 'package:new_app/presentation/hotels/01_widgets/searchHotel.dart';
 import 'package:new_app/presentation/hotels/01_widgets/hotelListScreen.dart';
 import 'package:new_app/widgets/ww_location_search_field.dart';
+import 'package:new_app/widgets/ww_showToast.dart';
 import 'package:permission_handler/permission_handler.dart';
 double currentHLatituderes = 0.0;
 double currentHLongituderes = 0.0;
@@ -118,6 +120,74 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
                         ],
                       ),
                       const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text('Check in time', style: s6),
+                          const SizedBox(width: 80),
+                          Expanded(
+                            child: searchFormField(
+                              st: 'CheckIn',
+                              readOnly: true,
+                              controller: ctr.checkInDatePickerSearchCtr,
+                              onTap: () async {
+                                DateTime? date = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate: DateTime.now().add(Duration(days: 365)),
+                                );
+                                if (date != null) {
+                                  ctr.checkInDatePickerSearchCtr.text =
+                                      DateFormat('dd-MM-yyyy').format(date);
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text('Check out time', style: s6),
+                          const SizedBox(width: 70),
+                          Expanded(
+                            child: searchFormField(
+                              st: 'CheckOut',
+                              readOnly: true,
+                              controller: ctr.checkOutDatePickerSearchCtr,
+                              onTap: () async {
+                                formatDateTime(ctr.checkInDatePickerSearchCtr.text);
+                                if (ctr.checkInDatePickerSearchCtr.text.isNotEmpty) {
+                                  DateTime? date = await showDatePicker(
+                                    context: context,
+                                    initialDate:
+                                    ctr.checkInDatePickerSearchCtr.text.isEmpty
+                                        ? DateTime.now()
+                                        : DateTime.parse(
+                                      formatDateTime(
+                                          ctr.checkInDatePickerSearchCtr.text),
+                                    ),
+                                    firstDate:
+                                    ctr.checkInDatePickerSearchCtr.text.isEmpty
+                                        ? DateTime.now()
+                                        : DateTime.parse(
+                                      formatDateTime(
+                                          ctr.checkInDatePickerSearchCtr.text),
+                                    ),
+                                    lastDate: DateTime.now().add(Duration(days: 365)),
+                                  );
+                                  if (date != null) {
+                                    ctr.checkOutDatePickerSearchCtr.text =
+                                        DateFormat('dd-MM-yyyy').format(date);
+                                  }
+                                } else {
+                                  wwShowToast("Please select check-in time");
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [

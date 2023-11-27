@@ -50,9 +50,9 @@ class HotelListScreen extends StatelessWidget {
                         label: data?.hotelName ?? "",
                         label1: data?.type ?? "",
                         label2: (data?.avgRating ?? "0.0") == "0.0"
-                            ? null
+                            ? ""
                             : "${rating} star hotel",
-                        label3: "perday/night",
+                        label3: "",
                       );
                     },
                   );

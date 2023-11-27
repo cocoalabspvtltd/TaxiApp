@@ -29,6 +29,8 @@ class HotelRepoImpl implements IHotelRepository {
         required String? minLong,
         required String? maxLat,
         required String? maxLong,
+        required String checkIn,
+        required String checkOut,
      }) async {
     var data = {
       "page": page,
@@ -40,6 +42,7 @@ class HotelRepoImpl implements IHotelRepository {
       "is_travelling":travelToUpdate,
       "location[current_lat]":currentHLatituderes,
       "location[current_lan]":currentHLongituderes
+      
     };
 
     log(data.toString());

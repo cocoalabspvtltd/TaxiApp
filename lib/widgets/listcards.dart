@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:new_app/utils/exports.dart';
 
 Widget listcards({
@@ -9,15 +10,19 @@ Widget listcards({
   required String label3,
   required Function ontap,
 }) {
+  int? rating = label2 != null ? int.tryParse(label2) : null;
+
   return GestureDetector(
-    onTap: (() => ontap()),
+    onTap: () => ontap(),
     child: Card(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       child: Column(
         children: [
           ClipRRect(
             borderRadius: const BorderRadius.only(
-                topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+              topLeft: Radius.circular(10),
+              topRight: Radius.circular(10),
+            ),
             child: Image.network(
               image,
               fit: BoxFit.cover,
@@ -48,12 +53,14 @@ Widget listcards({
                         children: [
                           Text(label2, style: s10),
                           Row(
-                            children: const [
-                              Icon(Icons.star, color: yellowColor, size: 15),
-                              Icon(Icons.star, color: yellowColor, size: 15),
-                              Icon(Icons.star, color: yellowColor, size: 15),
-                              Icon(Icons.star, color: yellowColor, size: 15),
-                            ],
+                            children: List.generate(
+                              rating ?? 0,
+                                  (index) => Icon(
+                                Icons.star,
+                                color: yellowColor,
+                                size: 15,
+                              ),
+                            ),
                           ),
                         ],
                       ),

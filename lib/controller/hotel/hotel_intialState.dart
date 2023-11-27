@@ -22,6 +22,8 @@ mixin HotelInitialState {
   Coordinates? resLocationTo;
   TextEditingController resLocationFromCtr = TextEditingController();
   TextEditingController resLocationToCtr = TextEditingController();
+  TextEditingController checkInDatePickerSearchCtr = TextEditingController();
+  TextEditingController checkOutDatePickerSearchCtr = TextEditingController();
 
   HotelBaseModel? hotelModel;
   bool hotelBtnLoader = false;
