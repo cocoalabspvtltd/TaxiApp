@@ -1,6 +1,7 @@
 import 'package:new_app/utils/exports.dart';
 
 const violetcolor = Color(0XFF06114F);
+const violetVColor=Color(0XFF4a527f);
 const yellowColor = Color(0xFFFFD33C);
 // const greyColor = Color(0XFF878787);
 const greyColor = Color(0XFFB5B5B5);

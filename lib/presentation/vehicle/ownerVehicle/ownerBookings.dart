@@ -18,7 +18,7 @@ class OwnerBookings extends StatelessWidget {
       body: GetBuilder<VehicleController>(
         id: "driverOwnerBookingsLoading",
         builder: (_) {
-          print("0>${_.driverOwnerBookings?.requests![0].pool!["created_at"]}");
+          // print("0>${_.driverOwnerBookings?.requests![0].pool!["created_at"]}");
           return _.driverOwnerBookingsLoading
               ? Center(child: CircularProgressIndicator())
               : _.driverOwnerBookingsFailure != null
@@ -77,25 +77,25 @@ class OwnerBookings extends StatelessWidget {
                                             fontSize: 14.0,
                                           ),
                                         ),
-                                        Text(
-                                          "${_.driverOwnerBookings!.requests![index].pool!["status"] ?? ""}",
-                                          style: s2.copyWith(
-                                            color: _
-                                                        .driverOwnerBookings!
-                                                        .requests![index]
-                                                        .pool!["status"] ==
-                                                true
-                                                ? Colors.green
-                                                : _
-                                                            .driverOwnerBookings!
-                                                            .requests![index]
-                                                .pool!["status"] ==
-                                                   false
-                                                    ? redColor
-                                                    : blackColor,
-                                            fontSize: 14.0,
-                                          ),
-                                        ),
+                                        // Text(
+                                        //   "${_.driverOwnerBookings!.requests![index].pool!["status"] ?? ""}",
+                                        //   style: s2.copyWith(
+                                        //     color: _
+                                        //                 .driverOwnerBookings!
+                                        //                 .requests![index]
+                                        //                 .pool!["status"] ==
+                                        //         true
+                                        //         ? Colors.green
+                                        //         : _
+                                        //                     .driverOwnerBookings!
+                                        //                     .requests![index]
+                                        //         .pool!["status"] ==
+                                        //            false
+                                        //             ? redColor
+                                        //             : blackColor,
+                                        //     fontSize: 14.0,
+                                        //   ),
+                                        // ),
                                       ],
                                     ),
                                     SizedBox(height: 10.0),
@@ -103,17 +103,17 @@ class OwnerBookings extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Text(
-                                          "DateTime: ${
-                                              _parseAndFormatDateTime(
-                                                _.driverOwnerBookings!.requests![index].pool!["created_at"],
-                                              )
-                                          }",
-                                          style: s2.copyWith(
-                                            color: blackColor,
-                                            fontSize: 14.0,
-                                          ),
-                                        ),
+                                        // Text(
+                                        //   "DateTime: ${
+                                        //       _parseAndFormatDateTime(
+                                        //         _.driverOwnerBookings!.requests![index].pool!["created_at"],
+                                        //       )
+                                        //   }",
+                                        //   style: s2.copyWith(
+                                        //     color: blackColor,
+                                        //     fontSize: 14.0,
+                                        //   ),
+                                        // ),
 
                                         // Text(
                                         //   "dummy",

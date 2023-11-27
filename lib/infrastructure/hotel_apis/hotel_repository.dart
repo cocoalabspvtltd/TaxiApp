@@ -14,12 +14,10 @@ abstract class IHotelRepository {
   Future<Either<Either<MainFailure, ErrorModel>, HotelBaseModel>>? getHotels({
     required int page,
     required int perPage,
-    required int distance,
-    int? minBudget,
-    int? maxBudget,
-    required double latitude,
-    required double longitude,
-    String? dateTime,
+    required String? minLat,
+    required String? minLong,
+    required String? maxLat,
+    required String? maxLong,
   });
 
   Future<Either<Either<MainFailure, ErrorModel>, List<HotelBookingModel>>>
@@ -27,7 +25,8 @@ abstract class IHotelRepository {
 
   Future<Either<Either<MainFailure, ErrorModel>, HotelModel>> getHotelDetails(
       {required int hotelId});
-
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookhotelreview(
+      {required int hotel_id, required int rating, required String comment});
   Future<Either<Either<MainFailure, ErrorModel>, String>>? bookHotel({
     required int roomId,
     required int hotelId,

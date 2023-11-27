@@ -1,5 +1,7 @@
+import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:new_app/controller/home/home_controller.dart';
+import 'package:new_app/core/packages/geocode/geocodingModel.dart';
 import 'package:new_app/presentation/home/home_screen.dart';
 import 'package:new_app/utils/exports.dart';
 import 'package:new_app/widgets/ww_location_search_field.dart';
@@ -7,7 +9,16 @@ import 'package:new_app/widgets/ww_mapScreen.dart';
 
 class TripCreateScreen extends StatelessWidget {
   const TripCreateScreen({super.key});
-
+  Future<LatLng?> getCurrentLocation() async {
+    try {
+      Position position = await Geolocator.getCurrentPosition(
+          desiredAccuracy: LocationAccuracy.high);
+      return LatLng(position.latitude, position.longitude);
+    } catch (e) {
+      print('Error getting current location: $e');
+      return null;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     final ctr = Get.find<HomeController>();
@@ -46,20 +57,33 @@ class TripCreateScreen extends StatelessWidget {
                             const SizedBox(height: 10),
                             Row(
                               children: [
-                                SizedBox(
-                                    width: 60, child: Text('From', style: s7)),
+                                SizedBox(width: 60, child: Text('From', style: s7)),
                                 Expanded(
-                                    child: WWLocationSearchField(
-                                  st: 'Search Location',
-                                  controller: ctr.rideCreateFromCtr,
-                                  futureFunction: () => ctr.apiLocationSearch(
-                                      ctr.rideCreateFromCtr.text),
-                                  getSelectedValue: (a) async =>
-                                      ctr.rideCreateForm = await ctr
-                                          .apiLocationFetchLatLong(a.label),
-                                ))
+                                  child: WWLocationSearchField(
+                                    st: 'Search Location',
+                                    controller: ctr.rideCreateFromCtr,
+                                    futureFunction: () => ctr.apiLocationSearch(ctr.rideCreateFromCtr.text),
+                                    getSelectedValue: (a) async {
+                                      if (a.label == 'Current Location') {
+                                        // If 'Current Location' is selected, get the current location
+                                        LatLng? currentLocation = await getCurrentLocation();
+                                        if (currentLocation != null) {
+                                          ctr.rideCreateForm = LocationData(
+                                            label: 'Current Location',
+                                            latitude: currentLocation.latitude,
+                                            longitude: currentLocation.longitude,
+                                          ) as Coordinates?;
+                                        }
+                                      } else {
+                                        // If another location is selected, fetch its latitude and longitude
+                                        ctr.rideCreateForm = await ctr.apiLocationFetchLatLong(a.label);
+                                      }
+                                    },
+                                  ),
+                                )
                               ],
                             ),
+
                             const SizedBox(height: 10),
                             Row(
                               children: [
@@ -148,4 +172,15 @@ class TripCreateScreen extends StatelessWidget {
           ])),
     );
   }
+}
+class LocationData {
+  final String label;
+  final double latitude;
+  final double longitude;
+
+  LocationData({
+    required this.label,
+    required this.latitude,
+    required this.longitude,
+  });
 }

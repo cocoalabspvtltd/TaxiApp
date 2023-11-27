@@ -11,7 +11,6 @@ class RestuarantListScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var controller = context.watch<RestuarantController>();
     return GetBuilder<RestaurantController>(
         id: "restaurant_list",
         builder: (ctr) {

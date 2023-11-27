@@ -95,6 +95,7 @@ Widget restuarantIcons({RestaurantModel? restaurantModel}) {
                 padding: EdgeInsets.all(10.0),
                 child: Icon(Icons.message, size: 28))),
       ),
+
     ],
   );
 }

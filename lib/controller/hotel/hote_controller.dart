@@ -23,23 +23,14 @@ class HotelController extends GetxController with HotelInitialState {
 
   /// Fetch hotel list here
   void getHotels() async {
-    if (hotelLatLong == null) {
-      wwShowToast("Please select location", status: Status.failure);
+    if (resLocationFrom == null) {
+      wwShowToast('Please search from location', status: Status.failure);
       return;
     }
-
-    // if (minBudgetCtr.text.isEmpty) {
-    //   wwShowToast("Please choose minimum budget", status: Status.failure);
-    //   return;
-    // }
-    // if (maxBudgetCtr.text.isEmpty) {
-    //   wwShowToast("Please choose maximum budget", status: Status.failure);
-    //   return;
-    // }
-    // if (datePickerCtr.text.isEmpty) {
-    //   wwShowToast("Please choose a date", status: Status.failure);
-    //   return;
-    // }
+    if (resLocationTo == null) {
+      wwShowToast('Please search to location', status: Status.failure);
+      return;
+    }
 
     hotelBtnLoader = true;
     update(["get_hotel"]);
@@ -47,14 +38,10 @@ class HotelController extends GetxController with HotelInitialState {
         await _hotelRepoImpl.getHotels(
       page: 1,
       perPage: 10,
-      latitude: hotelLatLong!.latitude,
-      longitude: hotelLatLong!.longitude,
-      distance: 19000,
-      minBudget:
-          minBudgetCtr.text.isEmpty ? null : int.parse(minBudgetCtr.text),
-      maxBudget:
-          maxBudgetCtr.text.isEmpty ? null : int.parse(maxBudgetCtr.text),
-      dateTime: datePickerCtr.text.isEmpty ? null : datePickerCtr.text,
+            minLat: resLocationFrom?.latitude.toString(),
+            minLong: resLocationFrom?.longitude.toString(),
+            maxLat: resLocationTo?.latitude.toString(),
+            maxLong: resLocationTo?.longitude.toString()
     );
 
     data?.fold((failure) {
@@ -78,7 +65,8 @@ class HotelController extends GetxController with HotelInitialState {
       maxBudgetCtr.clear();
       datePickerCtr.clear();
       hotelLatLong = null;
-      hotelLocationCtr.clear();
+      hotelLocationFromCtr.clear();
+      hotelLocationToCtr.clear();
       log("${hotelModel?.hotels}", name: "Hotels list");
     });
     update(["get_hotel", "hotel_list"]);
@@ -198,7 +186,35 @@ class HotelController extends GetxController with HotelInitialState {
       update(["edit_hotel_image"]);
     }
   }
+  void apihotelreviewSubmit(int hotelId, int rating, String comment) async {
+    hotelBookingLoader = true;
+    //errorBookTheRes = null;
+    update(["booking_btn"]);
+    Either<Either<MainFailure, ErrorModel>, dynamic>? data =
+    await _hotelRepoImpl.bookhotelreview(
+        hotel_id: hotelId, rating: rating, comment: comment);
 
+    data?.fold((failure) {
+    //  e = failure;
+      failure.fold((failure) {}, (error) {
+        log(error.toString());
+        wwShowToast(
+          "Something went wrong",
+          status: Status.failure,
+        );
+      });
+    }, (data) {
+      print("data $data");
+      wwShowToast(
+        "Review added Successfully",
+        status: Status.success,
+      );
+      Get.back();
+      // restaurantModel = data;
+    });
+    hotelBookingLoader = false;
+    update(['booking_btn']);
+  }
   Future<void> editMyHotelDetails({required AddOrEditHotel type}) async {
     final ctr = Get.find<AuthController>();
 

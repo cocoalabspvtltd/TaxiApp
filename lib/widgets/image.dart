@@ -18,7 +18,9 @@ Widget maps(BuildContext context) {
               width: 150,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(backgroundColor: whiteColor),
-                  onPressed: (() {}),
+                  onPressed: (() {
+
+                  }),
                   child: Text('View on map', style: s6)),
             ),
           )),

@@ -1,3 +1,5 @@
+import 'package:new_app/widgets/map_view_screen.dart';
+
 import '../../../utils/exports.dart';
 import '../../../model/hotel/hotel_booking_model/hotel_booking_model.dart';
 
@@ -81,9 +83,9 @@ class BookedHotelDetailsScreen extends StatelessWidget {
                       )
                     ],
                   ),
-                  const SizedBox(height: 20),
-                  maps(context),
-                  const SizedBox(height: 10),
+                   SizedBox(height: 20),
+                  MapViewWidget(latitude:details.latitude,longitude:details.longitude),
+                   SizedBox(height: 10),
                 ],
               ),
             ),

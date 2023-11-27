@@ -39,6 +39,8 @@ abstract class IRestaurantRepo {
 
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookRestaurant(
       {required int restaurant_id, required String date, required String time});
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookRestaurantreview(
+      {required int restaurant_id, required int rating, required String comment});
 
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantBaseModel>>?
       getBookedRestaurantList();

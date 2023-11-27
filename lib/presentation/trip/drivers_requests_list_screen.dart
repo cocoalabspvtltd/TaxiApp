@@ -10,9 +10,8 @@ class DriversRequestsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appBars(text: 'Driver Requests'),
+        appBar: appBars(text: 'Bookings'),
         body:
-
         GetBuilder<VehicleController>(
           id: 'driverRequestListLoader',
           builder: (_) {

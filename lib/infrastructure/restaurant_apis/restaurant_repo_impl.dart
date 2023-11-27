@@ -11,6 +11,7 @@ import 'package:new_app/model/errors/error_model/error_model.dart';
 import 'package:dio/dio.dart' as dio;
 import 'package:new_app/model/restuarant/restaurant_base_model/restaurant_model.dart';
 import 'package:new_app/model/review/review_base_model/review_base_model.dart';
+import 'package:new_app/presentation/restaurant/bookRestaurant/searchRestaurant.dart';
 import 'package:new_app/services/image_picker.dart';
 
 import '../../constants/endpoints.dart';
@@ -23,7 +24,7 @@ import '../../services/dio_service.dart';
 class RestaurantRepoImpl implements IRestaurantRepo {
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantBaseModel>>?
-      getRestaurants({
+  getRestaurants({
     required int page,
     required int perPage,
     required String? type,
@@ -39,7 +40,10 @@ class RestaurantRepoImpl implements IRestaurantRepo {
       "location[min_lat]": minLat,
       "location[min_lan]": minLong,
       "location[max_lat]": maxLat,
-      "location[max_lan]": maxLong
+      "location[max_lan]": maxLong,
+      "is_travelling":variableToUpdate,
+      "location[current_lat]":currentLatituderes,
+      "location[current_lan]":currentLongituderes
     };
 
     dio.FormData formData = dio.FormData.fromMap(data);
@@ -54,24 +58,24 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     );
 
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(RestaurantBaseModel.fromJson(response.data)),
+          (failure) => Left(failure),
+          (response) => Right(RestaurantBaseModel.fromJson(response.data)),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantModel>>?
-      getRestaurantDetails(int id) async {
+  getRestaurantDetails(int id) async {
     var response = await getIt<DioServices>()
         .request(url: '$baseUrl$apigetRestaurantDetail$id/show', method: 'GET');
     return response.fold((failure) => Left(failure),
-        (response) => Right(RestaurantModel.fromJson(response.data[0])));
+            (response) => Right(RestaurantModel.fromJson(response.data[0])));
   }
 
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookRestaurant(
       {required int restaurant_id,
-      required String date,
-      required String time}) async {
+        required String date,
+        required String time}) async {
     var data = {
       "restaurant_id": restaurant_id,
       "date": date,
@@ -88,41 +92,40 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     );
 
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantBaseModel>>?
-      getBookedRestaurantList() async {
+  getBookedRestaurantList() async {
     var response = await getIt<DioServices>()
         .request(url: '$baseUrl/$apiBookedRestaurants', method: 'GET');
 
     return response.fold((failure) => Left(failure),
-        (response) => Right(RestaurantBaseModel.fromJson(response.data)));
+            (response) => Right(RestaurantBaseModel.fromJson(response.data)));
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantModel>>?
-      getOwnerMyRestaurant() async {
+  getOwnerMyRestaurant() async {
     var response = await getIt<DioServices>()
         .request(url: '$baseUrl/$apigetOwnerMyRestaurant', method: 'GET');
 
     log(response.toString());
 
     return response.fold(
-        (failure) => Left(failure),
-        (response) =>
+            (failure) => Left(failure),
+            (response) =>
             Right(RestaurantModel.fromJson(response.data['restaurant'])));
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantBaseModel>>?
-      getOwnerMyFoodList(
-          {required int page,
-          required int perPage,
-          required int restaurantId}) async {
+  getOwnerMyFoodList({required int page,
+    required int perPage,
+    required int restaurantId}) async {
     var data = {
       "page": page,
       "per_page": perPage,
@@ -138,19 +141,18 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     );
 
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(RestaurantBaseModel.fromJson(response.data)),
+          (failure) => Left(failure),
+          (response) => Right(RestaurantBaseModel.fromJson(response.data)),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
-      ownerMyRestaurantAddFood(
-          {required String name,
-          required String description,
-          required String price,
-          required ImagePickerModel image,
-          required String type}) async {
+  ownerMyRestaurantAddFood({required String name,
+    required String description,
+    required String price,
+    required ImagePickerModel image,
+    required String type}) async {
     var data = {
       "name": name,
       "description": description,
@@ -173,21 +175,20 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     );
 
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
-      ownerMyRestaurantEditFood(
-          {required String name,
-          required String description,
-          required String price,
-          ImagePickerModel? selectedImage,
-          String? image,
-          required int id,
-          required String type}) async {
+  ownerMyRestaurantEditFood({required String name,
+    required String description,
+    required String price,
+    ImagePickerModel? selectedImage,
+    String? image,
+    required int id,
+    required String type}) async {
     var data = {
       "name": name,
       "description": description,
@@ -210,28 +211,28 @@ class RestaurantRepoImpl implements IRestaurantRepo {
       auth: false,
     );
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
-      ownerMyRestaurantDeleteFood({required int id}) async {
+  ownerMyRestaurantDeleteFood({required int id}) async {
     var response = await getIt<DioServices>().request(
       url: '$baseUrl/restaurant/food/$id/delete',
       method: 'DELETE',
       auth: false,
     );
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, RestaurantBaseModel>>?
-      getOwnerMyRestaurantBookingList() async {
+  getOwnerMyRestaurantBookingList() async {
     var response = await getIt<DioServices>().request(
         url: '$baseUrl/$apiGetOwnerMyRestaurantBookingListEndPoint',
         method: 'GET');
@@ -239,12 +240,12 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     log(response.toString());
 
     return response.fold((failure) => Left(failure),
-        (response) => Right(RestaurantBaseModel.fromJson(response.data)));
+            (response) => Right(RestaurantBaseModel.fromJson(response.data)));
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, ReviewBaseModel>>?
-      getReviewsOfMyRestaurantList() async {
+  getReviewsOfMyRestaurantList() async {
     var response = await getIt<DioServices>().request(
         url: '$baseUrl/$apiGetReviewsOdMyRestaurantListEndpoint',
         method: 'GET');
@@ -252,13 +253,13 @@ class RestaurantRepoImpl implements IRestaurantRepo {
     log(response.toString());
 
     return response.fold((failure) => Left(failure),
-        (response) => Right(ReviewBaseModel.fromJson(response.data)));
+            (response) => Right(ReviewBaseModel.fromJson(response.data)));
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
-      bookingAcceptOrRejectMyRestaurant(
-          {required String status, required int id}) async {
+  bookingAcceptOrRejectMyRestaurant(
+      {required String status, required int id}) async {
     var data = {
       "status": status,
     };
@@ -272,24 +273,24 @@ class RestaurantRepoImpl implements IRestaurantRepo {
       auth: false,
     );
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? editMyRestaurant(
       {int? id,
-      String? name,
-      String? phone,
-      String? address,
-      String? type,
-      String? city,
-      String? state,
-      ImagePickerModel? selectedImage,
-      required String? maxLat,
-      required String? maxLong,
-      String? district}) async {
+        String? name,
+        String? phone,
+        String? address,
+        String? type,
+        String? city,
+        String? state,
+        ImagePickerModel? selectedImage,
+        required String? maxLat,
+        required String? maxLong,
+        String? district}) async {
     final ctr = Get.find<RestaurantController>();
 
     var data;
@@ -347,22 +348,49 @@ class RestaurantRepoImpl implements IRestaurantRepo {
       auth: false,
     );
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 
   @override
   Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
-      deleteMyRestaurantReview({required int id}) async {
+  deleteMyRestaurantReview({required int id}) async {
     var response = await getIt<DioServices>().request(
       url: '$baseUrl/restaurant/reviews/$id/delete',
       method: 'DELETE',
       auth: false,
     );
     return response.fold(
-      (failure) => Left(failure),
-      (response) => Right(response.data),
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>?
+  bookRestaurantreview({required int restaurant_id,
+    required int rating,
+    required String comment}) async {
+    var data = {
+      "restaurant_id": restaurant_id,
+      "rating": rating,
+      "comment": comment,
+    };
+    print("->${data}");
+    dio.FormData formData = dio.FormData.fromMap(data);
+
+    var response = await getIt<DioServices>().request(
+      url: '$baseUrl/$apibookedresturentreview',
+      method: 'POST',
+      data: formData,
+      auth: false,
+    );
+
+    return response.fold(
+          (failure) => Left(failure),
+          (response) => Right(response.data),
+    );
+  }
+
 }

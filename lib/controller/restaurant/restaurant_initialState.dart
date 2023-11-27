@@ -19,9 +19,13 @@ mixin RestaurantInitialState {
   ScrollController restaurantListController = ScrollController();
   Coordinates? resLocationFrom;
   Coordinates? resLocationTo;
+  Coordinates? currentLocationlan;
+  Coordinates? currentLocLog;
+
   TextEditingController resLocationFromCtr = TextEditingController();
   TextEditingController resLocationToCtr = TextEditingController();
   TextEditingController resTypeCtr = TextEditingController();
+int? value;
 
   RestaurantModel? restaurantDetail;
   bool restaurantDetailLoader = false;

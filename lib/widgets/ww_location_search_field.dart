@@ -52,16 +52,35 @@ class WWLocationSearchField extends StatelessWidget {
       height: 35,
       width: double.infinity,
       child: TextFieldSearch(
+
         label: 'Search Location',
         initialList: initialList,
         itemsInView: itemInView,
         minStringLength: minStringLength,
         inputFormatters: inputFormatters,
         showDataWhenFocus: showDataWhenFocus,
-        future: futureFunction == null ? null : () => futureFunction!(),
+        future: futureFunction == null
+            ? null
+            : () async {
+          List<SearchText> data = await futureFunction!();
+          // Add the current location as a suggestion
+          data.insert(0, SearchText('Current Location'));
+          return data;
+        },
         controller: controller,
-        getSelectedValue:
-            getSelectedValue == null ? null : (a) => getSelectedValue!(a),
+        getSelectedValue: getSelectedValue == null
+            ? null
+            : (a) {
+          // Check if the selected value is the current location
+          if (a.label == 'Current Location') {
+            // Handle the selection of the current location
+            // For example, you can show a message or perform some action
+            print('Current location selected!');
+          } else {
+            // Handle the selection of other locations
+            getSelectedValue!(a);
+          }
+        },
         decoration: textFieldDecoration(st: st, icon: icon),
         textStyle: s3,
       ),

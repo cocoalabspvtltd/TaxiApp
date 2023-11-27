@@ -52,6 +52,12 @@ dependencies:
   dotted_border: ^2.0.0+3
   advance_pdf_viewer_fork: ^2.0.0
   cached_network_image: ^3.1.0
+  geolocator: ^10.1.0
+  permission_handler: ^11.0.1
+  web_socket_channel: ^2.4.0
+  flutter_rating_bar: ^4.0.1
+  carousel_slider: ^4.2.1
+
 
 dev_dependencies:
   flutter_test:

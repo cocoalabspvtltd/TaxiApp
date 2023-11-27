@@ -1,5 +1,6 @@
 import 'package:new_app/controller/auth/auth_controller.dart';
 import 'package:new_app/controller/vehicle/vehicle_controller.dart';
+import 'package:new_app/presentation/trip/drivers_requests_list_screen.dart';
 import 'package:new_app/presentation/vehicle/ownerVehicle/ownerAddVehicleScreen.dart';
 import 'package:new_app/presentation/vehicle/ownerVehicle/ownerBookings.dart';
 import 'package:new_app/presentation/vehicle/ownerVehicle/ownerDriverDetails.dart';
@@ -97,8 +98,10 @@ class OwnerVehicleStateless extends StatelessWidget {
               context: context,
               txt: 'Bookings',
               onpressed: () {
-                ctr.apiDriverOwnerBookingsList();
-                Get.to(() => OwnerBookings());
+                ctr.driverRequestList();
+                Get.to(() => DriversRequestsScreen());
+                // ctr.apiDriverOwnerBookingsList();
+                // Get.to(() => OwnerBookings());
               }),
 
           SizedBox(height: 20),

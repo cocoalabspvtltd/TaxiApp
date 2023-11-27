@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart' as dio;
+import 'package:new_app/presentation/hotels/bookHotel/availableHotels.dart';
 import '../../constants/endpoints.dart';
 import '../../services/dio_service.dart';
 import 'package:injectable/injectable.dart';
@@ -24,19 +25,21 @@ class HotelRepoImpl implements IHotelRepository {
   Future<Either<Either<MainFailure, ErrorModel>, HotelBaseModel>> getHotels(
       {required int page,
       required int perPage,
-      int? minBudget,
-      int? maxBudget,
-      required int distance,
-      required double latitude,
-      required double longitude,
-      String? dateTime}) async {
+        required String? minLat,
+        required String? minLong,
+        required String? maxLat,
+        required String? maxLong,
+     }) async {
     var data = {
       "page": page,
       "per_page": perPage,
-      "location": {"lat": latitude, "lan": longitude, "distance": distance},
-      "min": minBudget,
-      "max": maxBudget,
-      "date": dateTime
+      "location[min_lat]": minLat,
+      "location[min_lan]": minLong,
+      "location[max_lat]": maxLat,
+      "location[max_lan]": maxLong,
+      "is_travelling":travelToUpdate,
+      "location[current_lat]":currentHLatituderes,
+      "location[current_lan]":currentHLongituderes
     };
 
     log(data.toString());
@@ -349,6 +352,30 @@ class HotelRepoImpl implements IHotelRepository {
     return response.fold(
       (failure) => Left(failure),
       (response) => Right("Success"),
+    );
+  }
+
+  @override
+  Future<Either<Either<MainFailure, ErrorModel>, dynamic>>? bookhotelreview(
+      {required int hotel_id, required int rating, required String comment}) async {
+    var data = {
+      "hotel_id": hotel_id,
+      "rating": rating,
+      "comment": comment,
+    };
+    print("->${data}");
+    dio.FormData formData = dio.FormData.fromMap(data);
+
+    var response = await getIt<DioServices>().request(
+      url: '$baseUrl/$apibookedhotelreview',
+      method: 'POST',
+      data: formData,
+      auth: false,
+    );
+
+    return response.fold(
+          (failure) => Left(failure),
+          (response) => Right(response.data),
     );
   }
 }
