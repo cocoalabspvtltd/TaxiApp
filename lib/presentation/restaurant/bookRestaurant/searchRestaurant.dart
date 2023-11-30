@@ -8,21 +8,23 @@ import 'package:new_app/presentation/restaurant/01_widgets/restaurantListScreen.
 import 'package:new_app/utils/exports.dart';
 import 'package:new_app/widgets/ww_location_search_field.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 double currentLatituderes = 0.0;
 double currentLongituderes = 0.0;
 int variableToUpdate = 0;
+
 class SearchRestauarantScreen extends StatefulWidget {
   const SearchRestauarantScreen({Key? key}) : super(key: key);
 
   @override
-  _SearchRestauarantScreenState createState() => _SearchRestauarantScreenState();
+  _SearchRestauarantScreenState createState() =>
+      _SearchRestauarantScreenState();
 }
 
 class _SearchRestauarantScreenState extends State<SearchRestauarantScreen> {
   final ctr = Get.find<RestaurantController>();
   final hCtr = Get.find<HomeController>();
   bool switchValue = false;
-
 
   Future<void> _getCurrentLocation() async {
     var status = await Permission.location.request();
@@ -45,11 +47,12 @@ class _SearchRestauarantScreenState extends State<SearchRestauarantScreen> {
       print("Location permission denied");
     }
   }
+
   void initState() {
     super.initState();
-_getCurrentLocation();
-
+    _getCurrentLocation();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,7 +62,6 @@ _getCurrentLocation();
       ),
       body: SingleChildScrollView(
         controller: Get.find<RestaurantController>().restaurantListController,
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -67,11 +69,12 @@ _getCurrentLocation();
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Card(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                     // Text("${currentLatituderes}"),
+                      // Text("${currentLatituderes}"),
                       Text('Select location where you need to go', style: s6),
                       const SizedBox(height: 10),
                       Row(
@@ -81,10 +84,11 @@ _getCurrentLocation();
                             child: WWLocationSearchField(
                               st: 'Search Location',
                               controller: ctr.resLocationFromCtr,
-                              futureFunction: () =>
-                                  hCtr.apiLocationSearch(ctr.resLocationFromCtr.text),
-                              getSelectedValue: (a) async => ctr.resLocationFrom =
-                              await hCtr.apiLocationFetchLatLong(a.label),
+                              futureFunction: () => hCtr.apiLocationSearch(
+                                  ctr.resLocationFromCtr.text),
+                              getSelectedValue: (a) async => ctr
+                                      .resLocationFrom =
+                                  await hCtr.apiLocationFetchLatLong(a.label),
                             ),
                           )
                         ],
@@ -97,10 +101,10 @@ _getCurrentLocation();
                             child: WWLocationSearchField(
                               st: 'Search Location',
                               controller: ctr.resLocationToCtr,
-                              futureFunction: () =>
-                                  hCtr.apiLocationSearch(ctr.resLocationToCtr.text),
+                              futureFunction: () => hCtr
+                                  .apiLocationSearch(ctr.resLocationToCtr.text),
                               getSelectedValue: (a) async => ctr.resLocationTo =
-                              await hCtr.apiLocationFetchLatLong(a.label),
+                                  await hCtr.apiLocationFetchLatLong(a.label),
                             ),
                           )
                         ],
@@ -126,7 +130,8 @@ _getCurrentLocation();
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Travel', style: s7), // Text for the switch label
+                          Text('Travel',
+                              style: s7), // Text for the switch label
                           Switch(
                             value: switchValue,
                             onChanged: (value) {
@@ -138,9 +143,8 @@ _getCurrentLocation();
 
                                 // Add your logic here based on the switch value
                                 if (value) {
-
-print("sv-?${variableToUpdate}");
-print("sv-?${valu}");
+                                  print("sv-?${variableToUpdate}");
+                                  print("sv-?${valu}");
                                   // Switch is ON
                                   // Add logic for when the switch is ON
                                 } else {
@@ -150,6 +154,7 @@ print("sv-?${valu}");
                                 }
                               });
                             },
+                            activeColor: violetcolor,
                           ),
                         ],
                       ),
@@ -160,11 +165,12 @@ print("sv-?${valu}");
                         txt: 'Search',
                         context: context,
                         onpressed: () {
-                          Get.find<RestaurantController>().restaurantModel = null;
+                          Get.find<RestaurantController>().restaurantModel =
+                              null;
                           Get.find<RestaurantController>().apiGetRestaurants();
                         },
                       ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: 10),
                     ],
                   ),
                 ),

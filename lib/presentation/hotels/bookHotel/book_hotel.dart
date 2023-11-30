@@ -156,7 +156,7 @@ void addGuestDialog() {
   final ctr = Get.find<HotelController>();
   Get.defaultDialog(
     title: "Add Guest",
-    contentPadding: const EdgeInsets.all(10.0),
+    contentPadding: EdgeInsets.all(10.0),
     titleStyle: TextStyle(color: Colors.black),
     textConfirm: "Confirm",
     textCancel: "Cancel",

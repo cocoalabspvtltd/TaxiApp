@@ -52,7 +52,7 @@ class HotelController extends GetxController with HotelInitialState {
         hotelListFailure = failure;
       }, (error) {
         wwShowToast(
-          "${error.errors?.location?.first ?? "Something went wrong}"}",
+          "${error.errors?.location?.first ?? "Something went wrong"}",
           status: Status.failure,
         );
       });
@@ -62,13 +62,12 @@ class HotelController extends GetxController with HotelInitialState {
       hotelModel = data;
       hotelListFailure = null;
       hotelBtnLoader = false;
-
-      minBudgetCtr.clear();
-      maxBudgetCtr.clear();
-      datePickerCtr.clear();
-      hotelLatLong = null;
-      hotelLocationFromCtr.clear();
-      hotelLocationToCtr.clear();
+      resLocationFrom = null;
+      resLocationTo = null;
+      resLocationFromCtr.clear();
+      resLocationToCtr.clear();
+      checkInDatePickerSearchCtr.clear();
+      checkOutDatePickerSearchCtr.clear();
       log("${hotelModel?.hotels}", name: "Hotels list");
     });
     update(["get_hotel", "hotel_list"]);

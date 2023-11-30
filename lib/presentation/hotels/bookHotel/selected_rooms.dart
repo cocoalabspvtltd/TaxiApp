@@ -52,6 +52,7 @@ class _HotelRoomScreenState extends State<HotelRoomScreen> {
                                   selectedRoomIndex == value ? null : value as int;
                                 });
                               },
+                              activeColor:violetcolor,
                             ),
                             Text(
                               "${widget.rooms[index].type!.toUpperCase()}",
