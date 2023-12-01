@@ -18,6 +18,9 @@ abstract class IHotelRepository {
     required String? minLong,
     required String? maxLat,
     required String? maxLong,
+    required String checkIn,
+    required String checkOut,
+
   });
 
   Future<Either<Either<MainFailure, ErrorModel>, List<HotelBookingModel>>>

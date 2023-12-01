@@ -1,11 +1,14 @@
 import 'package:geolocator/geolocator.dart';
+import 'package:intl/intl.dart';
 import 'package:new_app/controller/home/home_controller.dart';
 import 'package:new_app/controller/hotel/hote_controller.dart';
+import 'package:new_app/presentation/hotels/bookHotel/book_hotel.dart';
 import 'package:new_app/utils/exports.dart';
-import 'package:new_app/presentation/hotels/01_widgets/searchHotel.dart';
 import 'package:new_app/presentation/hotels/01_widgets/hotelListScreen.dart';
 import 'package:new_app/widgets/ww_location_search_field.dart';
+import 'package:new_app/widgets/ww_showToast.dart';
 import 'package:permission_handler/permission_handler.dart';
+
 double currentHLatituderes = 0.0;
 double currentHLongituderes = 0.0;
 int travelToUpdate = 0;
@@ -21,7 +24,6 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
   final ctr = Get.find<HotelController>();
   final hctr = Get.find<HomeController>();
   bool switchValue = false;
-
 
   Future<void> _getCurrentLocation() async {
     var status = await Permission.location.request();
@@ -44,11 +46,12 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
       print("Location permission denied");
     }
   }
+
   void initState() {
     super.initState();
     _getCurrentLocation();
-
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +67,8 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
               child: Card(
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -77,19 +81,12 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
                             child: WWLocationSearchField(
                               st: 'Search Location',
                               controller: ctr.resLocationFromCtr,
-                              futureFunction: () =>
-                                  hctr.apiLocationSearch(ctr.resLocationFromCtr.text),
-                              getSelectedValue: (a) async => ctr.resLocationFrom =
-                              await hctr.apiLocationFetchLatLong(a.label),
+                              futureFunction: () => hctr.apiLocationSearch(
+                                  ctr.resLocationFromCtr.text),
+                              getSelectedValue: (a) async => ctr
+                                      .resLocationFrom =
+                                  await hctr.apiLocationFetchLatLong(a.label),
                             ),
-                            // child: WWLocationSearchField(
-                            //   st: 'Search Location',
-                            //   controller: ctr.resLocationFromCtr,
-                            //   futureFunction: () =>
-                            //       hctr.apiLocationSearch(ctr.resLocationFromCtr.text),
-                            //   getSelectedValue: (a) async =>
-                            //   ctr.hotelLatLong = await hctr.apiLocationFetchLatLong(a.label),
-                            // ),
                           )
                         ],
                       ),
@@ -98,30 +95,83 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
                         children: [
                           SizedBox(width: 60, child: Text('To', style: s7)),
                           Expanded(
-                            child:  WWLocationSearchField(
+                            child: WWLocationSearchField(
                               st: 'Search Location',
                               controller: ctr.resLocationToCtr,
-                              futureFunction: () =>
-                                  hctr.apiLocationSearch(ctr.resLocationToCtr.text),
+                              futureFunction: () => hctr
+                                  .apiLocationSearch(ctr.resLocationToCtr.text),
                               getSelectedValue: (a) async => ctr.resLocationTo =
-                              await hctr.apiLocationFetchLatLong(a.label),
+                                  await hctr.apiLocationFetchLatLong(a.label),
                             ),
-                            // child:  WWLocationSearchField(
-                            //   st: 'Search Location',
-                            //   controller: ctr.hotelLocationToCtr,
-                            //   futureFunction: () =>
-                            //       hctr.apiLocationSearch(ctr.hotelLocationToCtr.text),
-                            //   getSelectedValue: (a) async =>
-                            //   ctr.hotelLatLong = await hctr.apiLocationFetchLatLong(a.label),
-                            // ),
                           )
                         ],
                       ),
                       const SizedBox(height: 10),
                       Row(
+                        children: [
+                          Text('CheckIn', style: s6),
+                          Text('(Opt)', style: s3),
+                          const SizedBox(width: 80),
+                          Expanded(
+                            child: searchFormField(
+                              st: 'CheckIn',
+                              readOnly: true,
+                              controller: ctr.checkInDatePickerSearchCtr,
+                              onTap: () async {
+                                DateTime? date = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime.now(),
+                                  lastDate:
+                                      DateTime.now().add(Duration(days: 365)),
+                                );
+                                if (date != null) {
+                                  ctr.checkInDatePickerSearchCtr.text =
+                                      DateFormat('yyyy-MM-dd').format(date);
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Text('CheckOut', style: s6),
+                          Text('(Opt)', style: s3),
+                          const SizedBox(width: 70),
+                          Expanded(
+                            child: searchFormField(
+                              st: 'CheckOut',
+                              readOnly: true,
+                              controller: ctr.checkOutDatePickerSearchCtr,
+                              onTap: () async {
+                                if (ctr.checkInDatePickerSearchCtr.text
+                                    .isNotEmpty) {
+                                  DateTime? date = await showDatePicker(
+                                    context: context,
+                                    initialDate: DateTime.now(),
+                                    firstDate: DateTime.now(),
+                                    lastDate:
+                                        DateTime.now().add(Duration(days: 365)),
+                                  );
+                                  if (date != null) {
+                                    ctr.checkOutDatePickerSearchCtr.text =
+                                        DateFormat('yyyy-MM-dd').format(date);
+                                  }
+                                } else {
+                                  wwShowToast("Please select check-in time");
+                                }
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text('Travel', style: s7), // Text for the switch label
+                          Text('Travel',
+                              style: s7), // Text for the switch label
                           Switch(
                             value: switchValue,
                             onChanged: (value) {
@@ -130,10 +180,8 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
                                 travelToUpdate = value ? 1 : 0;
                                 bool valu = false;
                                 valu = value;
-
                                 // Add your logic here based on the switch value
                                 if (value) {
-
                                   print("sv-?${travelToUpdate}");
                                   print("sv-?${valu}");
                                   // Switch is ON
@@ -145,6 +193,7 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
                                 }
                               });
                             },
+                            activeColor: violetcolor,
                           ),
                         ],
                       ),
@@ -186,5 +235,3 @@ class _AvailableHotelScreenState extends State<AvailableHotelScreen> {
     );
   }
 }
-
-

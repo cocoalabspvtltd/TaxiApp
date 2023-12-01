@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:new_app/controller/hotel/hote_controller.dart';
+import 'package:new_app/model/hotel/hotel_model/room.dart';
 import 'package:new_app/utils/exports.dart';
 import 'package:new_app/widgets/ww_showToast.dart';
 import 'package:new_app/model/hotel/guest_model/guest_model.dart';
@@ -8,7 +9,8 @@ import '../01_widgets/guests_tile.dart';
 import '../01_widgets/select_room.dart';
 
 class BookHotel extends GetView<HotelController> {
-  const BookHotel({super.key});
+  final Room selectedRoom;
+  const BookHotel({super.key, required  this.selectedRoom});
 
   @override
   Widget build(BuildContext context) {
@@ -154,7 +156,7 @@ void addGuestDialog() {
   final ctr = Get.find<HotelController>();
   Get.defaultDialog(
     title: "Add Guest",
-    contentPadding: const EdgeInsets.all(10.0),
+    contentPadding: EdgeInsets.all(10.0),
     titleStyle: TextStyle(color: Colors.black),
     textConfirm: "Confirm",
     textCancel: "Cancel",

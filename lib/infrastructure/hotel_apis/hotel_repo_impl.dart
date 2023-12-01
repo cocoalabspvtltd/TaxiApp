@@ -29,6 +29,8 @@ class HotelRepoImpl implements IHotelRepository {
         required String? minLong,
         required String? maxLat,
         required String? maxLong,
+        required String? checkIn,
+        required String? checkOut,
      }) async {
     var data = {
       "page": page,
@@ -39,8 +41,13 @@ class HotelRepoImpl implements IHotelRepository {
       "location[max_lan]": maxLong,
       "is_travelling":travelToUpdate,
       "location[current_lat]":currentHLatituderes,
-      "location[current_lan]":currentHLongituderes
+      "location[current_lan]":currentHLongituderes,
     };
+
+    if (checkIn != null && checkIn.isNotEmpty && checkOut != null && checkOut.isNotEmpty) {
+      data["date[check_in]"] = checkIn;
+      data["date[check_out]"] = checkOut;
+    }
 
     log(data.toString());
     dio.FormData formData = dio.FormData.fromMap(data);
